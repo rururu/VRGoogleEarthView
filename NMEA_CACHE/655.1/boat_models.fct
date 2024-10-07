@@ -1,0 +1,5 @@
+(GEN-MODEL "Bermuda")
+(BoatModel (boat "russor") (model "Bermuda"))
+(BoatModel (boat "TIPAPACHERI BSP") (model "Bermuda"))
+(BoatModel (boat "NICO_JUD - PVE") (model "Bermuda"))
+(BoatModel (boat "SEM LA GUIDONNE - BF") (model "Bermuda"))
