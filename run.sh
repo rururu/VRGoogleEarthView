@@ -17,7 +17,7 @@ python3 DisplayServer.py ${PORT} &
 
 python3 -m webbrowser -t "http://localhost:${PORT}/chart" &
 
-streamlit run GUIControl.py &
+python3 -m streamlit run GUIControl.py &
 
 clips/clips -f clp/run.bat
 
