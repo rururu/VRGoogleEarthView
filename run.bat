@@ -1,17 +1,17 @@
 
 pushd "%~dp0"
 
-PORT=8448
-
 cd NMEA_CACHE
-python3 ../nmea_cashe2.py --port 8081 &
+start python.exe ../nmea_cashe2.py --port 8081
 cd ..
 
-python3 DisplayServer.py 8448 &
+start python.exe DisplayServer.py 8448
 
-python3 -m webbrowser -t "http://localhost:8448/chart" &
+start python.exe -m webbrowser -t "http://localhost:8448/chart"
 
-python3 -m streamlit run GUIControl.py &
+start python.exe -m streamlit run GUIControl.py
 
-clips\CLIPSIDE.exe
+start clips\CLIPSDOS.exe -f clp/run.bat
+
+exit
 
