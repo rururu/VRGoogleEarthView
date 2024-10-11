@@ -1,7 +1,7 @@
 # Virtual Regatta Google Earth View
 
 Realistic 3D look for the [Virtual Regatta](https://www.virtualregatta.com/en/offshore-game/).
-Especially fine fore shore views.
+Especially fine for shore views.
 
 This progect uses [A Tool for Building Expert Systems CLIPS](https://www.clipsrules.net/), 
 [Google Earth program](https://www.google.com/earth/about/versions/#earth-pro) and
