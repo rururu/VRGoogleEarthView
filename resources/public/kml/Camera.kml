@@ -2,12 +2,12 @@
  xmlns:gx="http://www.google.com/kml/ext/2.2">
   <Document>
 	  <LookAt>
-		<longitude>-11.5639183202773</longitude>
-		<latitude>6.5989083502829</latitude>
+		<longitude>-20.4876751490211</longitude>
+		<latitude>-5.6126536762617</latitude>
 		<range>100</range>
-		<tilt>50</tilt>
-        <altitude>40000</altitude>
-		<heading>51.2</heading>
+		<tilt>80</tilt>
+        <altitude>0</altitude>
+		<heading>195.8</heading>
 		<altitudeMode>relativeToGround</altitudeMode>
 	  </LookAt>
       <Style id="1">
@@ -19,10 +19,10 @@
     </Style>
 	<Placemark>
 	  <styleUrl>#1</styleUrl>
-	  <name>PAT2106-LDB</name>
+	  <name>BLIZZER</name>
 	  <description>On board of boat in Race</description>
 	  <Point>
-		<coordinates>-11.5639183202773,6.5989083502829,0</coordinates>
+		<coordinates>-20.4876751490211,-5.6126536762617,0</coordinates>
 	  </Point>
 	</Placemark>
   </Document>

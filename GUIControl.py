@@ -50,7 +50,7 @@ if cam_hdg != st.session_state.cam_hdg:
 c1, c2 = st.columns(2)
 with c1:
     alt_factor = st.session_state.alt_factor
-    cam_alt = st.slider("Altitude", 0, 40, 2, step=2, key='camalt')
+    cam_alt = st.slider("Altitude", 0, 40, 0, step=2, key='camalt')
     if cam_alt != st.session_state.cam_alt:
         st.session_state.cam_alt = cam_alt
         save_file(COMM_PATH, '(Command kml-cam-alt '+str(cam_alt * alt_factor)+')')
