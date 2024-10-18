@@ -28,6 +28,12 @@ class HttpGetHandler(BaseHTTPRequestHandler):
             self.send_header("Access-Control-Allow-Origin", "*")
             self.end_headers()
             self.wfile.write(self.mk_kml_camera(self.root+'/kml/Camera.kml').encode())
+        elif self.path == "/fleet":
+            self.send_response(200)
+            self.send_header("Content-type", "text/kml")
+            self.send_header("Access-Control-Allow-Origin", "*")
+            self.end_headers()
+            self.wfile.write(self.mk_kml_camera(self.root+'/kml/Fleet.kml').encode())
         elif path == "/chart-event":
             self.send_response(200)
             self.send_header("Content-type", "text/event-stream")

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/2.2">
+<Document>
+<NetworkLink>
+	<name>Virtual Regatta KML Fleet Server</name>
+	<refreshVisibility>1</refreshVisibility>
+	<visibility>1</visibility>
+	<open>1</open>
+	<flyToView>1</flyToView>
+	<description>VR KML Fleet Server</description>
+	<Link>
+		<href>http://localhost:8448/fleet</href>
+		<refreshMode>onInterval</refreshMode>
+		<refreshInterval>600</refreshInterval>
+	</Link>
+</NetworkLink>
+</Document>
+</kml>

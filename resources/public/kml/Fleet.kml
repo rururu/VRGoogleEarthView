@@ -1,0 +1,474 @@
+<kml xmlns="http://www.opengis.net/kml/2.2"
+	xmlns:gx="http://www.google.com/kml/ext/2.2">
+	<Document>
+	  <Style id="1">
+	    <IconStyle>
+		  <Icon>
+		   <href>img/sailing.png</href>
+		  </Icon>
+	    </IconStyle>
+	  </Style><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>LA DOLCE VITA</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-1.7136342132756,-8.19848379014497,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>BREIZHSHIP</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-4.22831592400047,1.72224635276504,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>LE DOUANIER DES MONT</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-30.811026636352,-41.9154172523643,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>GUEST_1701952426894</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-13.797255,-0.42323,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>GIRLELISADINAN</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-25.6139039140239,-24.6734236774229,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>LE BZH22</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>6.47450772158068,-8.07491918266583,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>FRAN_</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-11.8854352653288,-26.9199017044112,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>TIENS ME V'LA !</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-23.4504534677054,-26.758198427883,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>GOUDALE62</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>4.99629592505132,-6.6447425471196,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>JODEGREZ . DM TNT **</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-14.2141549639607,-23.9426908846746,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>ANDYC64</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-17.8614689513054,-25.0937884529656,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>GALIBIS</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-2.26236679426488,-14.7352508668703,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>BOGAVANTE_JOHNSON</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-32.669265553238,-11.6723181522566,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>BABARTH</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-13.8449309264017,-26.8434712010289,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>LAURMAN</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-24.0134267936487,-30.8227229391912,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>GTU 05</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-23.2259299357795,-27.8029063376576,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>COURSAPRESMOI</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-23.803897232663,-25.3382446337187,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>TOQUART</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-7.57814835467649,-15.7024414458598,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>GUEST_1728739437249</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-36.9275052769142,-19.2073800120818,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>GUEST_1728338000086</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-18.2159449830805,-18.9771063646546,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>ROMANOVICH5</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>11.219819311922,-8.08436091535324,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>GUEST_1728629385332</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-25.3048561371603,-31.1758409608491,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>L'ARBALITRIHRE</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-3.77599447395538,0.127212740301618,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>DJPAT</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-4.73729294032799,-7.78040280087949,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>KRISSSS LE ROUGE</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-17.4523961576943,-23.3434539991683,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>TORTAX</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-0.981571575057784,-11.8872943851673,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>JEAN77</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-26.4070613393437,-31.667911322526,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>ARMEL LETROUVEC</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-4.27972386167936,-11.9719601121828,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>SAIPAFAIRE</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-25.488058321776,-28.1498522285642,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>MOEA-CR66</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-14.6037290337365,-19.6767428974676,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>FULLMETALBREIZH</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>1.7990990057052,-1.78532974181071,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>JMR63</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-26.3532262462972,-34.1361192819645,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>STEPHDU41-42</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-6.13613071521032,-15.0865564243411,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>PAPOU93310</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-26.5572174655524,-25.6413236505892,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>MAHKINAYAX</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-21.7934997630669,-30.4756558977188,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>JURAEZIC-THESEACLEAN</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-16.0760959410497,-32.1467725943032,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>SEBOUILLE91-NTL</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>5.22659427122669,-11.5814770989204,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>GUEST_1729097352366</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-25.3226337873057,-28.3786006114104,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>GUEST_1727991253310</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>1.24484290703532,-3.87820301155373,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>PHONGHOOK1</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-27.1894994555913,3.13937495718469,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>JEREM29379</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-23.057064429766,-25.6836845843343,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>GUEST_1668024023895</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-26.4039007650661,-24.9738700382139,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>DAZ BK AI</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>6.76651771525835,-11.1118709759726,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>MIMIF71</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-18.5003865057051,-21.4164590123795,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>NICOSTILL</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>6.44118315176412,-4.01005021484526,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>T.OM</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>2.53065285753469,-1.2930199428413,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>MACBENJI</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>0.427336985141233,-10.5735764547144,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>DSM JL.PAILLOTET</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>8.72586090405905,-5.06053661348948,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>#ZIZOU</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-14.4810375918913,-23.3084193131889,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>NICO_JUD - PVE</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-15.7013103137976,-32.9108823836637,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>MOANABLUES</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-2.38389300855463,-14.3179111089646,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>FLORUS00 - TORC / YW</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-16.2704706721022,-31.7374873656959,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>LOHANN LA TERREUR -</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-15.8350815434883,-32.6967895673168,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>BRO-NAONED - BSP</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-24.8417238259835,-39.3147535670698,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>BOITSFORT-TP83</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-31.032260591722,-41.0636701567415,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>DUKY42</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-26.221594837315,-28.3966695715315,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>BLACKPANTHER BSP</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-16.7666937400683,-31.5504300184419,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>IL.MORO.V</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-22.9098247032867,-33.9408477408575,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>TRUITE</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-22.0549725400024,-25.1547726339858,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>JMLEMERCIER</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-14.6978504967031,-18.7278292182712,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>FEELING35</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-26.0193763636255,-31.1466350813177,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>SITO_APS</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>12.8373021364713,-10.6671426379955,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>SEM LA GUIDONNE - BF</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-15.8629820694001,-32.5451222179625,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>LICORNE21-MSF</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>10.6699948252492,-10.6661205458294,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>TIPAPACHERI BSP</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-15.8413808972351,-32.2153978220338,0</coordinates>
+	  </Point>
+	</Placemark><Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>russor</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-20.6873758896937,-22.8101268239165,0</coordinates>
+	  </Point>
+	</Placemark></Document>
+</kml>
+

@@ -1,28 +1,28 @@
 <kml xmlns="http://www.opengis.net/kml/2.2"
  xmlns:gx="http://www.google.com/kml/ext/2.2">
   <Document>
-	  <LookAt>
-		<longitude>-20.4876751490211</longitude>
-		<latitude>-5.6126536762617</latitude>
-		<range>100</range>
-		<tilt>80</tilt>
-        <altitude>0</altitude>
-		<heading>195.8</heading>
-		<altitudeMode>relativeToGround</altitudeMode>
-	  </LookAt>
-      <Style id="1">
-        <IconStyle>
-          <Icon>
-           <href>img/sailing.png</href>
-        </Icon>
-      </IconStyle>
-    </Style>
+	<LookAt>
+	<longitude>10.8609659611494</longitude>
+	<latitude>-11.0804040452027</latitude>
+	<range>100</range>
+	<tilt>80</tilt>
+	<altitude>40000</altitude>
+	<heading>141.6</heading>
+	<altitudeMode>relativeToGround</altitudeMode>
+	</LookAt>
+	<Style id="1">
+	  <IconStyle>
+	    <Icon>
+	     <href>img/sailing.png</href>
+	    </Icon>
+	  </IconStyle>
+	</Style>
 	<Placemark>
 	  <styleUrl>#1</styleUrl>
-	  <name>BLIZZER</name>
+	  <name>LAURENT-BZH</name>
 	  <description>On board of boat in Race</description>
 	  <Point>
-		<coordinates>-20.4876751490211,-5.6126536762617,0</coordinates>
+		<coordinates>10.8609659611494,-11.0804040452027,0</coordinates>
 	  </Point>
 	</Placemark>
   </Document>
