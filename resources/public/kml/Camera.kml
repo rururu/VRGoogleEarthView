@@ -2,12 +2,12 @@
  xmlns:gx="http://www.google.com/kml/ext/2.2">
   <Document>
 	<LookAt>
-	<longitude>10.8609659611494</longitude>
-	<latitude>-11.0804040452027</latitude>
+	<longitude>-18.4610142109993</longitude>
+	<latitude>-26.0445727658368</latitude>
 	<range>100</range>
 	<tilt>80</tilt>
-	<altitude>40000</altitude>
-	<heading>141.6</heading>
+	<altitude>0</altitude>
+	<heading>132.98012</heading>
 	<altitudeMode>relativeToGround</altitudeMode>
 	</LookAt>
 	<Style id="1">
@@ -19,10 +19,10 @@
 	</Style>
 	<Placemark>
 	  <styleUrl>#1</styleUrl>
-	  <name>LAURENT-BZH</name>
+	  <name>russor</name>
 	  <description>On board of boat in Race</description>
 	  <Point>
-		<coordinates>10.8609659611494,-11.0804040452027,0</coordinates>
+		<coordinates>-18.4610142109993,-26.0445727658368,0</coordinates>
 	  </Point>
 	</Placemark>
   </Document>

@@ -39,7 +39,8 @@ $ run.bat        # Windows (replace python.exe in this file in accordance with y
 ```
 6. Start Google Earth program.
 7. Open Google Earth View -> Sidebar (if needed).
-8. Open cd <..>/VRGoogleEarthView/LinkToCamera.kml file and wait..
+8. Open cd <..>/VRGoogleEarthView/LinkToCamera.kml file.
+9. Open cd <..>/VRGoogleEarthView/LinkToFleet.kml file and wait..
 
 #### Note:
 
