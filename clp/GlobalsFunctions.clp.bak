@@ -78,6 +78,21 @@
 		(crs ?crs)
 		(spd ?spd))))
 
+(deffunction epoch-from-gmt (?gmt ?sec)
+  (bind ?y (nth$ 1 ?gmt))
+  (bind ?mn (nth$ 2 ?gmt))
+  (bind ?d (nth$ 3 ?gmt))
+  (bind ?h (nth$ 4 ?gmt))
+  (bind ?m (nth$ 5 ?gmt))
+  (bind ?s (nth$ 6 ?gmt))
+  (bind ?ss (min (+ ?s (* ?m 60) (* ?h 3600) ?sec) (* 60 60 24))) ;; stop at midnight
+  (bind ?rhs (mod ?ss 3600))
+  (if (= ?rhs 0)
+    then (bind ?h (integer (/ ?ss 3600))) (bind ?m 0) (bind ?s 0)
+    else
+    (bind ?h (integer (/ ?ss 3600))) (bind ?m (integer (/ ?rhs 60))) (bind ?s (mod ?rhs 60)))
+  (format nil "%04d-%02d-%02dT%02d:%02d:%02dZ" ?y ?mn ?d ?h ?m ?s))
+
 (deffunction boat-feature (?name ?lat ?lon ?course ?speed ?iconURL)
   (bind ?props (str-cat "{\"name\":\"" ?name "\",\"iconURL\":\"" ?iconURL "\",\"course\":" ?course ",\"speed\":" ?speed "}"))
   (bind ?coord (str-cat "[" ?lon "," ?lat "]"))
@@ -86,7 +101,55 @@
             "},\"properties\":" 
             ?props
             "}"))
-                        
+
+(deffunction document (?start)
+	(bind ?clk (str-cat "{\"currentTime\":\""
+						?start
+						"\"}"))
+    (str-cat "{\"id\":\"document\",\"version\":\"1.0\",\"clock\":" ?clk "}"))
+            
+(deffunction boat-view3d-label (?name)
+  (str-cat "{\"text\":\""
+            ?name 
+            "\",\"scale\":0.3,\"pixelOffset\":{\"cartesian2\":[0.0, -40.0]}"
+            "}"))
+            ;;",\"heightReference\":\"RELATIVE_TO_GROUND\"}"))
+
+(deffunction boat-view3d-model (?model)
+  (bind ?gltf (fact-slot-value ?model gltf))
+  (bind ?scale (fact-slot-value ?model scale))
+  (bind ?extra (fact-slot-value ?model extra))
+  (str-cat "{\"gltf\":\"" ?gltf "\""
+            ",\"scale\":" ?scale
+            ?extra
+            ;;"}"))
+            ;;",\"heightReference\":\"CLAMP_TO_GROUND\"}"))
+            ",\"heightReference\":\"RELATIVE_TO_GROUND\"}"))
+            
+(deffunction boat-view3d-altitude (?model)
+  (bind ?draft (fact-slot-value ?model draft))
+  (if (eq ?draft nil)
+	then
+	(bind ?draft 0))
+  (- 0 ?draft))
+
+(deffunction boat-view3d (?name ?start ?finish ?lat ?lon ?lat2 ?lon2 ?model)
+  (bind ?lab (boat-view3d-label ?name))
+  (bind ?mod (boat-view3d-model ?model))
+  (bind ?alt (boat-view3d-altitude ?model))
+  (bind ?cgd (str-cat "[\"" ?start "\"," ?lon "," ?lat "," ?alt ",\"" ?finish "\"," ?lon2 "," ?lat2 "," ?alt "]"))
+  (str-cat "{\"id\":\"" 
+            ?name 
+            "\",\"label\":" 
+            ?lab 
+            ",\"model\":" 
+            ?mod 
+            ",\"orientation\":{\"velocityReference\":\"#position\"}"
+            ",\"position\":{\"cartographicDegrees\":"
+            ?cgd
+            ",\"interpolationAlgorithm\":\"LINEAR\""
+            ",\"forwardExtrapolationType\":\"HOLD\"}}"))
+            
 (deffunction create-fleet-geojson ()
 	(bind ?geojson "{\"type\":\"FeatureCollection\",\"features\":[")
 	(do-for-all-facts ((?b Boat)) TRUE
@@ -106,6 +169,28 @@
         (bind ?geojson (str-cat ?geojson (boat-feature ?b:name ?lat ?lon ?crs ?spd ?url) ",")))
 	(str-cat (sub-string 1 (- (str-length ?geojson) 1) ?geojson) "]}"))
 
+(deffunction add-boats-to-view3d-packet (?pv3 ?start ?time ?finish)
+   (do-for-all-facts ((?b Boat)(?m Model)) (eq ?b:model ?m)
+		(bind ?lat (nth$ 1 ?b:motion))
+		(bind ?lon (nth$ 2 ?b:motion))
+		(bind ?crs (nth$ 3 ?b:motion))
+		(bind ?spd (nth$ 4 ?b:motion))
+		(bind ?ang (deg-rad ?crs))
+		(bind ?lat2 (fut-lat ?lat ?spd ?time ?ang))
+		(bind ?lon2 (fut-lon ?lon ?spd ?time ?ang ?lat))
+        (bind ?pv3 (str-cat ?pv3 "," (boat-view3d ?b:name ?start ?finish ?lat ?lon ?lat2 ?lon2 ?m))))
+	?pv3)
+	
+(deffunction create-fleet-czml ()
+    (bind ?start (epoch-from-gmt ?*gmt* 0))
+    (bind ?time (* 2 ?*pause*))
+    (bind ?finish (epoch-from-gmt ?*gmt* ?time))
+    (bind ?doc (document ?start))
+    (bind ?pv3 (str-cat "[" ?doc))
+    (bind ?pv3 (add-boats-to-view3d-packet ?pv3 ?start ?time ?finish))
+    (bind ?pv3 (str-cat ?pv3 "]"))
+    ?pv3)
+	
 (deffunction string> (?a ?b)
 	(> (str-compare ?a ?b) 0))
 	
