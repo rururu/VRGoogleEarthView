@@ -15,9 +15,11 @@ Click the screenshot to see a video!
 
 You need to be installed on your machine:
 
-1. [VR Dashboard](https://chromewebstore.google.com/detail/vr-dashboard/amknkhejaogpekncjekiaolgldbejjan)
+1 Chrome browser.
 
-2. Python3. For Windows please check the Microsoft App store or download the installer [here](https://www.python.org/downloads/windows/)
+2. [VR Dashboard](https://chromewebstore.google.com/search/VR%20Dashboard%20I.T.Y.C.)
+
+3. Python3. For Windows please check the Microsoft App store or download the installer [here](https://www.python.org/downloads/windows/)
         The location of python.exe will be determined using PATH variable.
     For others platforms please follow the instructions for your OS or download the tarball [here](https://www.python.org/downloads/)
 
