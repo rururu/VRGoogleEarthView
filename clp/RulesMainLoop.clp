@@ -1,23 +1,25 @@
 ;; Main Defrules
 ;;;;;;;;;;;;;;;;;;;;;;;; MAIN LOOP ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defrule step-clock
-	(declare (salience -100))
-	?c <- (clock ?t)
-	=>
-	(pause 1)
-	(retract ?c)
-	(assert (clock (+ ?t 1)))
-	(run))
-
+;(defrule step-clock
+	;(declare (salience -100))
+	;?c <- (clock ?t)
+	;=>
+	;(pause 1)
+	;(retract ?c)
+	;(assert (clock (+ ?t 1)))
+	;(run))
+	
 (defrule Main-loop
 	(declare (salience +1))
 	(MY-BOAT ?mb)
-	(clock ?t)
-	(test (= (mod ?t ?*pause*) 0))
+	?c1 <- (clock ?t1)
+	(clock ?t2 & :(> ?t2 ?t1))
+	;(not (clock ?))
     =>
-    (println "clock " ?t)
-    (bind ?*gmt* (gm-time))
+    (retract ?c1)
+    (println "clock " ?t1)
+    (bind ?*interval* (- ?t2 ?t1))
     (if (neq ?*race* EOF)
 		then
 		(load-facts (str-cat "NMEA_CACHE/" ?*race* "/GPRMC.txt"))
@@ -35,7 +37,7 @@
     (test (eq ?time1 ?time2))
     =>
 	(retract ?mbi)
-	(move-boats ?*pause*)
+	(move-boats ?*interval*)
 	;;(println "Visualisation phase 1")
 	(retract ?p)
 	(assert (Visualisation phase)))
@@ -81,7 +83,7 @@
 				(timestamp ?time2)
 				(motion ?lat ?lon ?crs ?spd))
 	(MY-BOAT ?n)
-	(clock ?c)
+	(clock ?t)
 	(not (Boat (name ?n)))
 	=>
 	(retract ?mbi)
@@ -99,8 +101,8 @@
 				(crs ?crs) 
 				(spd ?spd)
 				(onboard TRUE)
-		 		(info-clock ?c)
-				(clock ?c)))
+		 		(info-clock ?t)
+				(clock ?t)))
 	;;(println "Visualisation phase 2")
 	(assert (Visualisation phase)))
     	
@@ -114,13 +116,13 @@
 				(lon ?lon)
 				(crs ?crs)
 				(spd ?spd))
-	(clock ?c)
+	(clock ?t)
 	=>
 	(println "Onboard Boat " ?obb " lat " ?lat " lon " ?lon " crs " ?crs " spd " ?spd)
 	(modify ?ob (onboard FALSE))
 	(modify ?nb (onboard TRUE)
-		 		(info-clock ?c)
-				(clock ?c)))
+		 		(info-clock ?t)
+				(clock ?t)))
 		 			
 ;;;;;;;;;;;;;;;;;;;;;;;; VISUALISATION PHASE ;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -132,9 +134,9 @@
     
 (defrule Continue-main-loop
     (declare (salience -1))
-    ?p <- (Visualisation phase)
+    ?phs <- (Visualisation phase)
     =>
-    (retract ?p))
+    (retract ?phs))
    
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     

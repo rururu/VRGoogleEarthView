@@ -19,7 +19,6 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-COMM_PATH = 'resources/public/comm/command.fct'
 NAMES_PATH = 'resources/public/chart/fleet.txt'
 
 if 'cam_hdg' not in st.session_state:
@@ -45,7 +44,7 @@ st.header(':green[Look at]')
 cam_hdg = st.slider("Heading", -180, 180, 0, step=10, key='view')
 if cam_hdg != st.session_state.cam_hdg:
     st.session_state.cam_hdg = cam_hdg
-    save_file(COMM_PATH, '(Command kml-cam-hdg '+str(cam_hdg)+')')
+    send_cmd('(assert (Command kml-cam-hdg '+str(cam_hdg)+'))')
 
 c1, c2 = st.columns(2)
 with c1:
@@ -53,23 +52,23 @@ with c1:
     cam_alt = st.slider("Altitude", 0, 40, 0, step=2, key='camalt')
     if cam_alt != st.session_state.cam_alt:
         st.session_state.cam_alt = cam_alt
-        save_file(COMM_PATH, '(Command kml-cam-alt '+str(cam_alt * alt_factor)+')')
+        send_cmd('(assert (Command kml-cam-alt '+str(cam_alt * alt_factor)+'))')
         
 with c2:
     alt_factor = st.selectbox("Altitude factor", [1, 10, 100, 1000, 10000],  key='altfac')
     if alt_factor != st.session_state.alt_factor:
         st.session_state.alt_factor = alt_factor
-        save_file(COMM_PATH, '(Command kml-cam-alt '+str(cam_alt * alt_factor)+')')
+        send_cmd('(assert (Command kml-cam-alt '+str(cam_alt * alt_factor)+'))')
     
 cam_tilt = st.slider("Tilt", 0, 90, 80, step=10, key='camtilt')
 if cam_tilt != st.session_state.cam_tilt:
     st.session_state.cam_tilt = cam_tilt
-    save_file(COMM_PATH, '(Command kml-cam_tilt '+str(cam_tilt)+')')
+    send_cmd('(assert (Command kml-cam_tilt '+str(cam_tilt)+'))')
     
 cam_rng = st.slider("Range", 0, 200, 100, step=10, key='camrng')
 if cam_rng != st.session_state.cam_rng:
     st.session_state.cam_rng = cam_rng
-    save_file(COMM_PATH, '(Command kml-cam_rng '+str(cam_rng)+')')
+    send_cmd('(assert (Command kml-cam_rng '+str(cam_rng)+'))')
     
 def load_boats():
     names = load_names(NAMES_PATH)
@@ -78,7 +77,7 @@ def load_boats():
     
 def go_onboard():
     onb_boat = st.session_state.onb_boat
-    save_file(COMM_PATH, '(Command on-board "'+onb_boat+'")')    
+    send_cmd('(assert (Command on-board "'+onb_boat+'"))')    
 
 c3, c4, c5 = st.columns([1, 4, 1])
 with c3:

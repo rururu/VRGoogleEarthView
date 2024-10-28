@@ -1,13 +1,15 @@
 ;; Deffunctions
 
 (defglobal
-  ?*pause* = 20
+  ?*interval* = 20 ;; will be updated
   ?*race* = EOF
   ?*gmt* = (gm-time)
   ?*boat-names* = (create$)
   ?*boat-names-path* = "resources/public/chart/fleet.txt"
   ?*base* = "http://localhost:8448/")
   
+(deffunction step-clock ()
+	(assert (clock (integer (time)))))
 
 (deffunction rand01 ()
   (/ (random 0 100000) 100000))
@@ -28,7 +30,7 @@
 (deffunction pause (?delay)
    (bind ?start (time))
    (while (< (time) (+ ?start ?delay)) do))
-
+   
 (deffunction read-file (?path)
     (if (open ?path rr "r")
      then

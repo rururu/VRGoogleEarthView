@@ -21,29 +21,25 @@ class HttpGetHandler(BaseHTTPRequestHandler):
             self.send_header("Content-type", "text/kml")
             self.send_header("Access-Control-Allow-Origin", "*")
             self.end_headers()
-            self.wfile.write(self.mk_kml_camera(self.root+'/kml/Fleet.kml').encode())
+            self.wfile.write(self.mk_kml_fleet(self.root+'/kml/Fleet.kml').encode())
         elif self.path == "/camera":
             self.send_response(200)
             self.send_header("Content-type", "text/kml")
             self.send_header("Access-Control-Allow-Origin", "*")
             self.end_headers()
-            self.wfile.write(self.mk_kml_camera(self.root+'/kml/Camera.kml').encode())
+            self.wfile.write(self.mk_kml_camera().encode())
         elif self.path == "/fleet":
             self.send_response(200)
             self.send_header("Content-type", "text/kml")
             self.send_header("Access-Control-Allow-Origin", "*")
             self.end_headers()
-            self.wfile.write(self.mk_kml_camera(self.root+'/kml/Fleet.kml').encode())
+            self.wfile.write(self.mk_kml_fleet(self.root+'/kml/Fleet.kml').encode())
         elif path == "/chart-event":
             self.send_response(200)
             self.send_header("Content-type", "text/event-stream")
             self.send_header("Access-Control-Allow-Origin", "*")
             self.end_headers()
             self.wfile.write(self.mk_event('fleet', self.root+'/chart/fleet.geojson').encode())
-        elif path == "/command":
-            params = parse_qs(parsed_path.query)
-            self.send_command(params, self.root+'/comm/command.fct')
-            self.send_response(200)
         else:
             if path == '/chart':
                 filename = self.root+'/LeafletChart.html'
@@ -75,8 +71,20 @@ class HttpGetHandler(BaseHTTPRequestHandler):
             f.close()
             return data
             
-    def mk_kml_camera(self, path):
+    def mk_kml_camera(self):
+        send_cmd('(step-clock)')
+        data = send_cmd('(create-onboard-kml)')
+        #print('Camera data '+str(data))
+        if len(data) > 0:
+            return data
+        else:
+            return ''
+
+    def mk_kml_fleet(self, path):
+        send_cmd('(save-fleet-kml)')
+        time.sleep(2)
         data = self.read_file(path)
+        print('Update Fleet data ')
         if len(data) > 0:
             return data
         else:
@@ -89,15 +97,6 @@ class HttpGetHandler(BaseHTTPRequestHandler):
         else:
             return ''
         
-    def send_command(self, params, path):
-        kk = list(params.keys())
-        if len(kk) > 0:
-            cmd = kk[0]
-            arg = params[cmd][0]
-            with open(path, "w") as f:
-                f.write('(Command '+cmd+' '+arg+')\n')
-                f.close()
-                
 def run(server_class=HTTPServer, handler_class=HttpGetHandler, port=None):
     global data_path
     server_address = ('127.0.0.1', port)
@@ -121,7 +120,6 @@ print("Race "+str(race))
 
 save_file('NMEA_CACHE/'+race+'/AIVDM.txt', '')
 save_file('NMEA_CACHE/'+race+'/GPRMC.txt', '')
-save_file('resources/public/comm/command.fct', '')
 
 run(port=8448)
 

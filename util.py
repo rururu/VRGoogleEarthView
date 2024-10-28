@@ -1,3 +1,7 @@
+from Sockets import *
+
+INCLIPS_PORT = 8888
+INBUF_SIZE = 4096
 
 def load_file(path):
     with open(path, "r") as f:
@@ -24,3 +28,5 @@ def load_names(path):
     bb = [x[:-1] for x in lst]
     return bb
     
+def send_cmd(cmd):
+    return socket_send("localhost", INCLIPS_PORT, cmd, INBUF_SIZE)
