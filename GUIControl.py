@@ -88,6 +88,15 @@ with c4:
 
 with c5:
     st.button('Go on board', on_click=go_onboard)
-
     
+st.divider()
+    
+def exit_func():
+    send_cmd('(exit)')
+    
+c6, c7 = st.columns([5, 1])
+with c6:
+    st.warning('Do click this button before closing other windows!', icon="⚠️")
+with c7:
+    st.button('Exit', on_click=exit_func)
     
