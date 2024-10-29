@@ -15,18 +15,19 @@ Click the screenshot to see a video!
 
 You need to be installed on your machine:
 
-1 Chrome browser.
+1. Chrome browser.
 
-2. [VR Dashboard](https://chromewebstore.google.com/search/VR%20Dashboard%20I.T.Y.C.)
+2. [VR Dashboard plugin](https://chromewebstore.google.com/search/VR%20Dashboard%20I.T.Y.C.)
 
-3. Python3. For Windows please check the Microsoft App store or download the installer [here](https://www.python.org/downloads/windows/)
-        The location of python.exe will be determined using PATH variable.
-    For others platforms please follow the instructions for your OS or download the tarball [here](https://www.python.org/downloads/)
-
+3. Python3.
+	Simplest way to install python is by installing Python IDE [Thonny](https://thonny.org/)
+	Alternatively for Windows please check the Microsoft App store or download the installer [here](https://www.python.org/downloads/windows/).
+    The location of python.exe will be determined using PATH variable.
+    For others platforms please follow the instructions for your OS or download the tarball [here](https://www.python.org/downloads/).
 
 ## Installation and usage
 
-Download VRGoogleEarthView project from the Github using an OS command "git clone https://github.com/rururu/VRGoogleEarthView.git " or aa button "Code" on this page and unzip somewhere. Then:
+Download VRGoogleEarthView project from the Github using an OS command "git clone https://github.com/rururu/VRGoogleEarthView.git " or click a button "Code" on this page and unzip somewhere. Then:
 
 1. Open "Virual Regatta" page in a browser.
 2. Activate "VR Dashboard" plugin.
@@ -56,7 +57,8 @@ $ pip install pynmea2
 $ pip install streamlit
 ...
 ```
-2. Simplest way to install python is by installing Python IDE [Thonny](https://thonny.org/) and using use run_with_thonny.bat as template for run.bat.
+2. If you have Thonny installed (see Prerequisites 3. above), use run_with_thonny.bat as a template for the run.bat.
+
 ## Video Lesson
 
 [VR Shore View](https://www.youtube.com/watch?v=qwWi1miGMjE)
