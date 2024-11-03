@@ -35,11 +35,24 @@ if 'names' not in st.session_state:
     st.session_state.names = []
 if 'onb_boat' not in st.session_state:
     st.session_state.onb_boat = 'russor'
-
+if 'cmd_any' not in st.session_state:
+    st.session_state.cmd_any = ''
 
 st.title(':blue[Virtual Regatta on Google Earth]')
 
-st.header(':green[Look at]')
+with st.sidebar:
+    st.header(':violet[System Control]')
+
+    data = ''
+
+    cma = st.text_input('Command', value='')
+    if cma != st.session_state.cmd_any:
+        st.session_state.cmd_any = cma
+        data = send_cmd(cma)
+            
+    ta = st.text_area('System Messages', data, height=600)
+
+st.header(':green[Look At]')
 
 cam_hdg = st.slider("Heading", -180, 180, 0, step=10, key='view')
 if cam_hdg != st.session_state.cam_hdg:
