@@ -111,9 +111,13 @@ def run(server_class=HTTPServer, handler_class=HttpGetHandler, port=None):
             server.server_close()
 
 race = ''
+rpath = 'NMEA_CACHE/RACE.txt'
 
+if not os.path.exists(rpath):
+    save_file(rpath, '')
+    
 while len(race) == 0 or race == 'EOF':
-     race = load_file('NMEA_CACHE/RACE.txt')
+     race = load_file(race_path)
      time.sleep(1)
 
 print("Race "+str(race))
