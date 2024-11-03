@@ -8,7 +8,7 @@ This progect uses [A Tool for Building Expert Systems CLIPS](https://www.clipsru
 Chrome browser with
 [VR Dashboard plugin](https://chrome.google.com/webstore/search/VR%20Dashboard)
 
-[![Watch the video](1.png)](https://youtu.be/Vz75uLYhVD0)
+[![Watch the video](1.png)](https://youtu.be/NUErnVKNLAw)
 Click the screenshot to see a video!
 
 ## Prerequisites
