@@ -117,7 +117,7 @@ if not os.path.exists(rpath):
     save_file(rpath, '')
     
 while len(race) == 0 or race == 'EOF':
-     race = load_file(race_path)
+     race = load_file(rpath)
      time.sleep(1)
 
 print("Race "+str(race))
