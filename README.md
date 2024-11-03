@@ -8,7 +8,7 @@ This progect uses [A Tool for Building Expert Systems CLIPS](https://www.clipsru
 Chrome browser with
 [VR Dashboard plugin](https://chrome.google.com/webstore/search/VR%20Dashboard)
 
-[![Watch the video](1.png)](https://www.youtube.com/watch?v=qwWi1miGMjE)
+[![Watch the video](1.png)](https://youtu.be/Vz75uLYhVD0)
 Click the screenshot to see a video!
 
 ## Prerequisites
@@ -61,7 +61,7 @@ $ pip install streamlit
 
 ## Video Lesson
 
-[VR Shore View](https://www.youtube.com/watch?v=qwWi1miGMjE)
+[Lesson 1](https://www.youtube.com/watch?v=oOA6aZAwZYQ)
 
 _More detailed version: [https://github.com/rururu/sail-pro](https://github.com/rururu/sail-pro)_
 
