@@ -12,7 +12,9 @@ Chrome browser with
 Click the screenshot to see a video!
 
 ## Prerequisites
-
+```diff
+- So far the program works only on Linux (possibly Mac OS). We are working on fixing it.
+```
 You need to be installed on your machine:
 
 1. Chrome browser.
