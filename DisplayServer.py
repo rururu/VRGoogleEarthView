@@ -27,7 +27,7 @@ class HttpGetHandler(BaseHTTPRequestHandler):
             self.send_header("Content-type", "text/kml")
             self.send_header("Access-Control-Allow-Origin", "*")
             self.end_headers()
-            self.wfile.write(self.mk_kml_camera().encode())
+            self.wfile.write(self.mk_kml_camera(self.root+'/kml/Camera.kml').encode())
         elif self.path == "/fleet":
             self.send_response(200)
             self.send_header("Content-type", "text/kml")
@@ -71,9 +71,8 @@ class HttpGetHandler(BaseHTTPRequestHandler):
             f.close()
             return data
             
-    def mk_kml_camera(self):
-        send_cmd('(step-clock)')
-        data = send_cmd('(create-onboard-kml)')
+    def mk_kml_camera(self, path):
+        data = self.read_file(path)
         #print('Camera data '+str(data))
         if len(data) > 0:
             return data
@@ -81,8 +80,6 @@ class HttpGetHandler(BaseHTTPRequestHandler):
             return ''
 
     def mk_kml_fleet(self, path):
-        send_cmd('(save-fleet-kml)')
-        time.sleep(2)
         data = self.read_file(path)
         print('Update Fleet data ')
         if len(data) > 0:
@@ -125,7 +122,9 @@ print("Race "+str(race))
 save_file('NMEA_CACHE/'+race+'/AIVDM.txt', '')
 save_file('NMEA_CACHE/'+race+'/GPRMC.txt', '')
 
-run(port=8448)
+port = sys.argv[1]
+
+run(port=int(port))
 
 
 

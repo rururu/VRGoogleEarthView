@@ -7,6 +7,7 @@
 	?*CAM-ALT* = 0
 	?*CAM-TLT* = 80
 	?*CAM-RNG* = 100
+	?*ONB-KML-PATH* = "resources/public/kml/Camera.kml"
 	?*FLT-KML-PATH* = "resources/public/kml/Fleet.kml"
 	?*TEMP-KML* = "<kml xmlns=\"http://www.opengis.net/kml/2.2\"
  xmlns:gx=\"http://www.google.com/kml/ext/2.2\">
@@ -112,8 +113,15 @@
 		(bind ?kml (substitute-in-kml ?*TEMP-KML* ?name ?lat2 ?lon2 (+ ?b:crs ?*CAM-HDG*))))
 	?kml)
 	
-(deffunction save-fleet-kml ()
+(defrule Save-fleet-kml
+	(clock ?t & :(= (mod ?t 60) 0))
+	=>
 	(save-kml (create-fleet-kml) ?*FLT-KML-PATH*))
+	
+(defrule Save-onboard-kml
+	(clock ?t & :(= (mod ?t 4) 0))
+	=>
+	(save-kml (create-onboard-kml) ?*ONB-KML-PATH*))
 	
 
 		

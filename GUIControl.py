@@ -51,14 +51,17 @@ with st.sidebar:
         st.session_state.cmd_any = cma
         data = send_cmd(cma)
             
-    ta = st.text_area('System Messages', data, height=600)
+    ta = st.text_area('System Messages', data, height=500)
+    
+    if st.button('Restart Control'):
+        save_file(CMD_PATH, '')
 
 st.header(':green[Look At]')
 
 cam_hdg = st.slider("Heading", -180, 180, 0, step=10, key='view')
 if cam_hdg != st.session_state.cam_hdg:
     st.session_state.cam_hdg = cam_hdg
-    send_cmd('(assert (Command kml-cam-hdg '+str(cam_hdg)+'))')
+    send_cmd('(assert (Kml-cam-hdg '+str(cam_hdg)+'))')
 
 c1, c2 = st.columns(2)
 with c1:
@@ -66,23 +69,23 @@ with c1:
     cam_alt = st.slider("Altitude", 0, 40, 0, step=2, key='camalt')
     if cam_alt != st.session_state.cam_alt:
         st.session_state.cam_alt = cam_alt
-        send_cmd('(assert (Command kml-cam-alt '+str(cam_alt * alt_factor)+'))')
+        send_cmd('(assert (Kml-cam-alt '+str(cam_alt * alt_factor)+'))')
         
 with c2:
     alt_factor = st.selectbox("Altitude factor", [1, 10, 100, 1000, 10000],  key='altfac')
     if alt_factor != st.session_state.alt_factor:
         st.session_state.alt_factor = alt_factor
-        send_cmd('(assert (Command kml-cam-alt '+str(cam_alt * alt_factor)+'))')
+        send_cmd('(assert (Kml-cam-alt '+str(cam_alt * alt_factor)+'))')
     
 cam_tilt = st.slider("Tilt", 0, 90, 80, step=10, key='camtilt')
 if cam_tilt != st.session_state.cam_tilt:
     st.session_state.cam_tilt = cam_tilt
-    send_cmd('(assert (Command kml-cam_tilt '+str(cam_tilt)+'))')
+    send_cmd('(assert (Kml-cam_tilt '+str(cam_tilt)+'))')
     
 cam_rng = st.slider("Range", 0, 200, 100, step=10, key='camrng')
 if cam_rng != st.session_state.cam_rng:
     st.session_state.cam_rng = cam_rng
-    send_cmd('(assert (Command kml-cam_rng '+str(cam_rng)+'))')
+    send_cmd('(assert (Kml-cam_rng '+str(cam_rng)+'))')
     
 def load_boats():
     names = load_names(NAMES_PATH)
@@ -91,8 +94,8 @@ def load_boats():
     
 def go_onboard():
     onb_boat = st.session_state.onb_boat
-    send_cmd('(assert (Command on-board "'+onb_boat+'"))')    
-
+    send_cmd('(assert (On-board ~'+onb_boat+'~))')
+    
 c3, c4, c5 = st.columns([1, 4, 1])
 with c3:
     st.button('Load boats', on_click=load_boats)

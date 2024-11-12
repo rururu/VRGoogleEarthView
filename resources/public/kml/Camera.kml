@@ -1,0 +1,30 @@
+<kml xmlns="http://www.opengis.net/kml/2.2"
+ xmlns:gx="http://www.google.com/kml/ext/2.2">
+  <Document>
+	<LookAt>
+	<longitude>-12.0711672185124</longitude>
+	<latitude>41.1666286841092</latitude>
+	<range>100</range>
+	<tilt>80</tilt>
+	<altitude>0</altitude>
+	<heading>249.0</heading>
+	<altitudeMode>relativeToGround</altitudeMode>
+	</LookAt>
+	<Style id="1">
+	  <IconStyle>
+	    <Icon>
+	     <href>img/sailing.png</href>
+	    </Icon>
+	  </IconStyle>
+	</Style>
+	<Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>VIACHESLAVK</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-12.0711672185124,41.1666286841092,0</coordinates>
+	  </Point>
+	</Placemark>
+  </Document>
+</kml>
+

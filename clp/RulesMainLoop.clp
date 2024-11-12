@@ -1,32 +1,49 @@
-;; Main Defrules
+;; Main Loop
+
 ;;;;;;;;;;;;;;;;;;;;;;;; MAIN LOOP ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;(defrule step-clock
-	;(declare (salience -100))
-	;?c <- (clock ?t)
-	;=>
-	;(pause 1)
-	;(retract ?c)
-	;(assert (clock (+ ?t 1)))
-	;(run))
-	
-(defrule Main-loop
-	(declare (salience +1))
-	(MY-BOAT ?mb)
-	?c1 <- (clock ?t1)
-	(clock ?t2 & :(> ?t2 ?t1))
-	;(not (clock ?))
+(deffunction pause (?now ?future)
+	(bind ?delay (- ?future ?now))
+	(if (> ?delay 0)
+		then
+		(while (< (time) (+ ?now ?delay)) do)))
+		
+(defrule Step
+	?s <- (Step phase)
+	?c <- (clock ?t)
+	?f <- (future ?)
+	=>
+	;(println "Step phase")
+	(execute-commands)
+	(retract ?s ?c ?f)
+	(bind ?t (time))
+	(assert (future (+ ?t ?*interval*)))
+	(assert (clock (integer ?t)))
+	(assert (Work phase)))
+
+(defrule Continue-main-loop
+    (declare (salience -100))
+    ?w <- (Work phase)
+	(future ?fut)
     =>
-    (retract ?c1)
-    (println "clock " ?t1)
-    (bind ?*interval* (- ?t2 ?t1))
+    (retract ?w)
+	(pause (time) ?fut)
+	(assert (Step phase)))
+
+;;;;;;;;;;;;;;;;;;;;;;;; WORK PHASE ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	
+(defrule Work-phase
+	(Work phase)
+	(MY-BOAT ?mb)
+	(clock ?t)
+    =>
     (if (neq ?*race* EOF)
 		then
 		(load-facts (str-cat "NMEA_CACHE/" ?*race* "/GPRMC.txt"))
-		(load-facts (str-cat "NMEA_CACHE/" ?*race* "/boat_models.fct")))
+		;(load-facts (str-cat "NMEA_CACHE/" ?*race* "/boat_models.fct"))
 		(assert (Information phase))
 		else
-		(bind ?*race* (read-file "NMEA_CACHE/RACE.txt")))
+		(bind ?*race* (read-file "NMEA_CACHE/RACE.txt"))))
 		
 ;;;;;;;;;;;;;;;;;;;;;;;; INFORMATION PHASE ;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -37,7 +54,7 @@
     (test (eq ?time1 ?time2))
     =>
 	(retract ?mbi)
-	(move-boats ?*interval*)
+	(move-boats ?*data-interval*)
 	;;(println "Visualisation phase 1")
 	(retract ?p)
 	(assert (Visualisation phase)))
@@ -46,8 +63,10 @@
 	(Information phase)
     ?ts <- (timestamp ?time1)
     ?mbi <- (MyBoatInfo (timestamp ?time2))
+    (clock ?t)
     (test (neq ?time1 ?time2))
     =>
+    (println "clock " ?t)
 	(println "New Info Timestamp " ?time2)
 	(retract ?ts)
 	(do-for-all-facts ((?b Boat)) TRUE
@@ -88,7 +107,7 @@
 	=>
 	(retract ?mbi)
 	(retract ?p)
-	(println "Onboard boat " ?n " lat " ?lat " lon " ?lon " crs " ?crs " spd " ?spd)
+	(println "My boat " ?n " lat " ?lat " lon " ?lon " crs " ?crs " spd " ?spd)
 	(bind ?*boat-names* (create$ ?n))
 	(do-for-all-facts ((?b Boat)) TRUE
 		(bind ?*boat-names* (create$ ?*boat-names* ?b:name)))
@@ -127,17 +146,13 @@
 ;;;;;;;;;;;;;;;;;;;;;;;; VISUALISATION PHASE ;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defrule Write-chart-file
-    (Visualisation phase)
+    ?p <- (Visualisation phase)
     =>
-    ;;(println "Write-chart-file")
-    (write-file "resources/public/chart/fleet.geojson" (create-fleet-geojson)))
+    (write-file "resources/public/chart/fleet.geojson" (create-fleet-geojson))
+    (retract ?p)
+    (assert (Work phase)))
     
-(defrule Continue-main-loop
-    (declare (salience -1))
-    ?phs <- (Visualisation phase)
-    =>
-    (retract ?phs))
-   
+    
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     
 

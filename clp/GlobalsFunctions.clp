@@ -1,12 +1,17 @@
 ;; Deffunctions
 
 (defglobal
-  ?*interval* = 20 ;; will be updated
-  ?*race* = EOF
-  ?*gmt* = (gm-time)
-  ?*boat-names* = (create$)
-  ?*boat-names-path* = "resources/public/chart/fleet.txt"
-  ?*base* = "http://localhost:8448/")
+	?*interval* = 1
+	?*data-interval* = 4
+	?*race* = EOF
+	?*CAM-HDG* = 0
+	?*CAM-ALT* = 0
+	?*CAM-TLT* = 80
+	?*CAM-RNG* = 100
+	?*boat-names* = (create$)
+	?*cmd-path* = "resources/public/comm/command.txt"
+	?*boat-names-path* = "resources/public/chart/fleet.txt"
+	?*base* = "http://localhost:8448/")
   
 (deffunction step-clock ()
 	(assert (clock (integer (time)))))
@@ -27,19 +32,15 @@
     (bind ?a (create$ ?a (+ ?min (* (rand01) (- ?max ?min))))))
   ?a)
 
-(deffunction pause (?delay)
-   (bind ?start (time))
-   (while (< (time) (+ ?start ?delay)) do))
-   
 (deffunction read-file (?path)
     (if (open ?path rr "r")
-     then
-      (bind ?r (read rr))
-      (close rr)
-      (return ?r)
-     else
-      (println "read-file " ?path " error!")
-      (return FALSE)))
+		then
+		(bind ?r (read rr))
+		(close rr)
+		(return ?r)
+		else
+		(println "read-file " ?path " error!")
+		(return FALSE)))
 
 (deffunction write-file (?path ?txt)
     (if (open ?path rw "w")
@@ -52,7 +53,10 @@
       (return FALSE)))
       
 (deffunction clear-file (?path)
-    (write-file ?path ""))
+	(write-file ?path ""))
+	
+(deffunction empty-file-p (?path)
+	(eq (read-file ?path) EOF))
 
 (deffunction append-file (?path ?txt)
     (open ?path ra "a")

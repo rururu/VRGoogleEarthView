@@ -1,5 +1,5 @@
 
 (deffacts Start-facts
 	(MY-BOAT "russor")
-	(clock 0)
+	(Step phase)
     (timestamp ""))
