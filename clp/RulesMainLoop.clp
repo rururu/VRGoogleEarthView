@@ -37,11 +37,11 @@
 	(MY-BOAT ?mb)
 	(clock ?t)
     =>
-    (if (neq ?*race* EOF)
+    (if (and ?*race* (neq ?*race* EOF))
 		then
-		(load-facts (str-cat "NMEA_CACHE/" ?*race* "/GPRMC.txt"))
-		;(load-facts (str-cat "NMEA_CACHE/" ?*race* "/boat_models.fct"))
-		(assert (Information phase))
+		(if (load-csv-ordered-facts (str-cat "NMEA_CACHE/" ?*race* "/MyBoat.csv") "MyBoat")
+			then
+			(assert (Information phase)))
 		else
 		(bind ?*race* (read-file "NMEA_CACHE/RACE.txt"))))
 		
@@ -50,19 +50,18 @@
 (defrule Old-timestamp
 	?p <- (Information phase)
     ?ts <- (timestamp ?time1)
-    ?mbi <- (MyBoatInfo (timestamp ?time2))
+    ?mbi <- (MyBoat ?time2 $?)
     (test (eq ?time1 ?time2))
     =>
 	(retract ?mbi)
 	(move-boats ?*data-interval*)
-	;;(println "Visualisation phase 1")
 	(retract ?p)
 	(assert (Visualisation phase)))
 
 (defrule New-timestamp
 	(Information phase)
     ?ts <- (timestamp ?time1)
-    ?mbi <- (MyBoatInfo (timestamp ?time2))
+    ?mbi <- (MyBoat ?time2 $?)
     (clock ?t)
     (test (neq ?time1 ?time2))
     =>
@@ -71,14 +70,13 @@
 	(retract ?ts)
 	(do-for-all-facts ((?b Boat)) TRUE
 		(retract ?b))
-	(println "Fleet " (load-facts (str-cat "NMEA_CACHE/" ?*race* "/AIVDM.txt"))))
+	(println "BoatInfos " (load-csv-ordered-facts (str-cat "NMEA_CACHE/" ?*race* "/BoatInfo.csv") "BoatInfo"))
+	(println "BoatNames " (load-csv-ordered-facts (str-cat "NMEA_CACHE/" ?*race* "/BoatName.csv") "BoatName")))
 	
 (defrule Assert-Boat
 	(Information phase)
-	?bi <- (BoatInfo 
-				(motion ?lat ?lon ?crs ?spd)
-				(mmsi ?mmsi))
-	?bn <- (boat-name ?name ?mmsi)
+	?bi <- (BoatInfo 1 ?lat ?lon ?crs ?spd ?mmsi)
+	?bn <- (BoatName 5 ?name ?mmsi)
 	=>
 	(retract ?bi ?bn)
 	(assert (Boat (name ?name)
@@ -98,9 +96,7 @@
 (defrule Assert-my-Boat
 	(declare (salience -1))
 	?p <- (Information phase)
-    ?mbi <- (MyBoatInfo 
-				(timestamp ?time2)
-				(motion ?lat ?lon ?crs ?spd))
+    ?mbi <- (MyBoat ?time2 ?lat ?lon ?crs ?spd ?data)
 	(MY-BOAT ?n)
 	(clock ?t)
 	(not (Boat (name ?n)))
@@ -122,7 +118,6 @@
 				(onboard TRUE)
 		 		(info-clock ?t)
 				(clock ?t)))
-	;;(println "Visualisation phase 2")
 	(assert (Visualisation phase)))
     	
 (defrule ChangeOnboardBoat

@@ -14,17 +14,6 @@
 	(slot info-clock (type INTEGER))
 	(slot clock (type INTEGER)(default 0)))
     
-(deftemplate BoatInfo
-    (slot name (type STRING))
-    (multislot motion (type FLOAT)) 
-    (slot mmsi (type INTEGER)))
-
-(deftemplate MyBoatInfo
-    (slot timestamp (type STRING) (default "")) 
-    (slot name (type STRING))
-    (multislot motion (type FLOAT)) 
-    (slot date (type STRING)))
-
 (deftemplate Model
     (slot boat (type STRING)(default ""))
 	(slot type (type STRING)(default ""))

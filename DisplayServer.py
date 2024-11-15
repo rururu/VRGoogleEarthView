@@ -119,9 +119,6 @@ while len(race) == 0 or race == 'EOF':
 
 print("Race "+str(race))
 
-save_file('NMEA_CACHE/'+race+'/AIVDM.txt', '')
-save_file('NMEA_CACHE/'+race+'/GPRMC.txt', '')
-
 port = sys.argv[1]
 
 run(port=int(port))

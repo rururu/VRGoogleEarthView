@@ -10,7 +10,7 @@
 	?*ONB-KML-PATH* = "resources/public/kml/Camera.kml"
 	?*FLT-KML-PATH* = "resources/public/kml/Fleet.kml"
 	?*TEMP-KML* = "<kml xmlns=\"http://www.opengis.net/kml/2.2\"
- xmlns:gx=\"http://www.google.com/kml/ext/2.2\">
+  xmlns:gx=\"http://www.google.com/kml/ext/2.2\">
   <Document>
 	<LookAt>
 	<longitude>$lon</longitude>
@@ -67,8 +67,9 @@
 ;;;;;;;;;;;;;;;;;;;; F U N C T I O N S ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (deffunction name-correction (?name)
-	(bind ?name (str-replace ?name "<" ""))
-	(bind ?name (str-replace ?name ">" ""))
+	(bind ?name (str-replace ?name "<" "less"))
+	(bind ?name (str-replace ?name ">" "more"))
+	(bind ?name (str-replace ?name "&" "and"))
 	?name)
 
 (deffunction substitute-in-kml (?kml ?name ?lat ?lon ?hdg)

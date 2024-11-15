@@ -16,6 +16,10 @@
 					else "")))))
 		(write-file ?*cmd-path* (str-cat "R:" ?r))))
 		
+(deffunction exit-CLIPS ()
+	(clear-file ?*cmd-path*)
+	(exit))
+		
 ;;;;;;;;;;;;;;;;;;;;;; Command execution by rule  ;;;;;;;;;;;;;;;;;;;;;		
 	 	
 (defrule KML-view

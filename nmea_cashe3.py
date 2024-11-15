@@ -6,7 +6,7 @@ import logging
 import os
 import datetime
 import sys
-from nmea_decoder import aivdm_parse, gprmc_parse
+from nmea_decoder3 import aivdm_parse, gprmc_parse
 from util import save_file
 
 parser = argparse.ArgumentParser()
@@ -62,17 +62,28 @@ def cashe_message(race, message):
             save_file(race + "/" + "boat_models.fct", "")
 	
     if message.find(b"AIVDM") != -1 :
-        if getFlag(race) == "0":
+        if getFlag(race) == "0": # Clear files
             setFlag("1", race)
-            openf = 'wb'						
-        else:
+            openf = 'wb'
+            path = race + "/" + "BoatInfo.csv"
+            with open(path, openf) as fdFlag:
+                fdFlag.write(b"")
+            path = race + "/" + "BoatName.csv"
+            with open(path, openf) as fdFlag:
+                fdFlag.write(b"")
+        else: # Append files
             openf = 'ab'
         message2 = aivdm_parse(message)
-        path = race + "/" + "AIVDM.txt"
-        with open(path, openf) as fdFlag:
-            if message2 is not None:
-                #print(path+" updated "+str(len(message2)))
-                fdFlag.write(message2)	
+        if message2.startswith(b"1"):
+            path = race + "/" + "BoatInfo.csv"
+            with open(path, openf) as fdFlag:
+                if message2 is not None:
+                    fdFlag.write(message2)
+        elif message2.startswith(b"5"):
+            path = race + "/" + "BoatName.csv"
+            with open(path, openf) as fdFlag:
+                if message2 is not None:
+                    fdFlag.write(message2)
     else:
         if message.find(b"GPRMC") != -1 :
             setFlag("0", race)
@@ -90,7 +101,7 @@ def cashe_message(race, message):
         else:
             openf = 'ab'
         message2 = gprmc_parse(message)
-        path = race + "/" + "GPRMC.txt"
+        path = race + "/" + "MyBoat.csv"
         with open(path, openf) as fdFlag:
             if message2 is not None:
                 #print(str(message2))

@@ -154,7 +154,37 @@
 		(foreach ?e ?mf
 			(printout mf ?e crlf))
 		(close mf)))
+		
+(deffunction load-csv-facts (?path ?typ)
+	(if (open ?path csv-facts "r")
+		then
+		(bind ?i 0)
+		(while (neq (bind ?ln (readline csv-facts)) EOF)
+			(bind ?i (+ ?i 1))
+			(if (= ?i 1) 
+				then
+				(bind ?t (explode$ (str-replace ?ln "," " ")))
+				else
+				(bind ?r (explode$ (str-replace ?ln "," " ")))
+				(bind ?f (str-cat "(" ?typ " "))
+				(loop-for-count (?j (length$ ?t))
+					(bind ?f (str-cat ?f "(" (nth$ ?j ?t) " " (nth$ ?j ?r) ")")))
+				(bind ?f (str-cat ?f ")"))
+				(assert-string ?f)))
+		(close csv-facts)
+		?i))
 
+(deffunction load-csv-ordered-facts (?path ?typ)
+	(if (open ?path csv-facts "r")
+		then
+		(bind ?i 0)
+		(while (neq (bind ?ln (readline csv-facts)) EOF)
+			(bind ?i (+ ?i 1))
+			(bind ?r (str-replace ?ln "," " "))
+			(bind ?f (str-cat "(" ?typ " " ?r ")"))
+			(assert-string ?f))
+		(close csv-facts)
+		?i))
 
 
 	

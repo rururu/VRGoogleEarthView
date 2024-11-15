@@ -1,1 +1,1 @@
-"C:(exit)"
+"C:(exit-CLIPS)"

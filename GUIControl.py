@@ -109,7 +109,7 @@ with c5:
 st.divider()
     
 def exit_func():
-    send_cmd('(exit)')
+    send_cmd('(exit-CLIPS)')
     
 c6, c7 = st.columns([5, 1])
 with c6:

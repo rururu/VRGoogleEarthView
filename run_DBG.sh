@@ -10,7 +10,7 @@ fuser -k 8448/tcp
 sleep 16s
 
 cd NMEA_CACHE
-python3 ../nmea_cashe2.py --port 8081 &
+python3 ../nmea_cashe3.py --port 8081 &
 cd ..
 
 python3 DisplayServer.py ${PORT} &
