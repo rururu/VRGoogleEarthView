@@ -57,6 +57,8 @@ $ pip install pynmea2
 $ pip install streamlit
 ...
 ```
+More easy do this using Thonny's menu Tools -> Manage packages..
+
 2. If you have Thonny installed (see Prerequisites 3. above), use run_with_thonny.bat as a template for the run.bat.
 3. To enliven frozen process you may need to click blue button in upper left corner of VR page.
 4. Also, sometimes you have to refresh KML servers on Google Earth side panel (View menu) LinkToCamera.kml and LinktoFleet.kml

@@ -50,10 +50,11 @@ class NMEAHandler(http.server.BaseHTTPRequestHandler):
 
 times = dict()
 flags = dict()
+bt_info = []
+bt_name = []
 
 def cashe_message(race, message):
-    bt_info = []
-    bt_name = []
+    global bt_info, bt_name
     
     if not os.path.exists(race):
         try:
@@ -63,7 +64,6 @@ def cashe_message(race, message):
         else:
             print ("The directory %s was successfully created" % race)
             save_file(race + "/" + "boat_models.fct", "")
-	
     if message.find(b"AIVDM") != -1 :
         if getFlag(race) == "0": # Save and clear lists
             setFlag("1", race)
@@ -73,9 +73,9 @@ def cashe_message(race, message):
             bt_name = []
         message2 = aivdm_parse(message)
         if message2.startswith(b"1"):
-            bt_info.append(message2)
+            bt_info.append(message2.decode())
         elif message2.startswith(b"5"):
-            bt_name.append(message2)
+            bt_name.append(message2.decode())
     else:
         if message.find(b"GPRMC") != -1 :
             setFlag("0", race)
