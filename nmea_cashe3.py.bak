@@ -50,11 +50,10 @@ class NMEAHandler(http.server.BaseHTTPRequestHandler):
 
 times = dict()
 flags = dict()
+bt_info = []
+bt_name = []
 
 def cashe_message(race, message):
-    bt_info = []
-    bt_name = []
-    
     if not os.path.exists(race):
         try:
             os.mkdir(race)
