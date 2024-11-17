@@ -86,7 +86,7 @@ if cam_rng != st.session_state.cam_rng:
     send_cmd('(assert (Kml-cam_rng '+str(cam_rng)+'))')
     
 def load_boats():
-    names = load_names(NAMES_PATH)
+    names = line_list(NAMES_PATH)
     names.sort()
     st.session_state.names = names
     
