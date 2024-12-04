@@ -13,5 +13,5 @@ start python.exe -m streamlit run GUIControl.py
 
 start clips\CLIPSDOS.exe -f clp/run.bat
 
-rem exit
+exit
 

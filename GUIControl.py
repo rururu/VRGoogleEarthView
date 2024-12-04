@@ -61,7 +61,10 @@ with st.sidebar:
         if st.button('Restart CLIPS'):
             send_cmd('(exit-CLIPS)')
             save_file(CMD_PATH, '')
-            os.system('./run_CLP.sh &')
+            if os.name == 'nt':
+                os.system('run_CLP.bat')
+            else:
+                os.system('./run_CLP.sh &')
 
 st.header(':green[Look At]')
 
