@@ -1,7 +1,8 @@
 import time
 
 CMD_PATH = 'resources/public/comm/command.txt'
-TIMEOUT = 20
+RST_PATH = 'resources/public/comm/result.txt'
+TIMEOUT = 10
 
 def load_file(path):
     with open(path, "r") as f:
@@ -38,17 +39,22 @@ def empty_file(path):
     return load_file(path) == ''
     
 def send_cmd(cmd):
+    if cmd == '(exit-CLIPS)':
+        TIMEOUT2 = 2
+    else:
+        TIMEOUT2 = TIMEOUT
     for i in range(TIMEOUT):
         buf = load_file(CMD_PATH)
-        if len(buf) < 2 or buf.startswith('R:'):
-            save_file(CMD_PATH, '"C:'+cmd+'"')
-            for i in range(TIMEOUT):
-                buf = load_file(CMD_PATH)
-                if buf.startswith('R:'):
-                    return buf[2:]
+        if len(buf) < 2:
+            save_file(RST_PATH, '')
+            save_file(CMD_PATH, '"'+cmd+'"')
+            for i in range(TIMEOUT2):
+                buf = load_file(RST_PATH)
+                if len(buf) > 1:
+                    return buf
                 time.sleep(1)
         else:
-            print('Command '+cmd+' waiting result timeout '+str(TIMEOUT))
+            print('Command '+cmd+' waiting result timeout '+str(TIMEOUT2))
             return ''
         time.sleep(1)
     print('Command '+cmd+' waiting server timeout '+str(TIMEOUT))

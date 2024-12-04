@@ -1,4 +1,5 @@
 import streamlit as st
+import os
 from util import *
 
 st.set_page_config(
@@ -51,8 +52,16 @@ with st.sidebar:
 
     ta = st.text_area('System Messages', data, height=500)
     
-    if st.button('Restart Control'):
-        save_file(CMD_PATH, '')
+    c1, c2 = st.columns(2)
+    with c1:
+        if st.button('Restart Control'):
+            save_file(CMD_PATH, '')
+            save_file(CMD_PATH, '')
+    with c2:
+        if st.button('Restart CLIPS'):
+            send_cmd('(exit-CLIPS)')
+            save_file(CMD_PATH, '')
+            os.system('./run_CLP.sh &')
 
 st.header(':green[Look At]')
 

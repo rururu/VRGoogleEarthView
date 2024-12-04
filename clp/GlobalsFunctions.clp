@@ -10,6 +10,7 @@
 	?*CAM-RNG* = 100
 	?*boat-names* = (create$)
 	?*cmd-path* = "resources/public/comm/command.txt"
+	?*rst-path* = "resources/public/comm/result.txt"
 	?*boat-names-path* = "resources/public/chart/fleet.txt"
 	?*base* = "http://localhost:8448/")
   

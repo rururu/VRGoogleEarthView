@@ -2,22 +2,23 @@
 
 (deffunction execute-commands ()
 	(bind ?c (read-file ?*cmd-path*))
-	(if (and (neq ?c EOF)(> (str-length ?c) 2)(eq (sub-string 1 2 ?c) "C:"))
+	(if (and (neq ?c EOF)(neq ?c ""))
 		then
-		(bind ?c (sub-string 3 (str-length ?c) ?c))
 		(bind ?c (str-replace ?c "~" "\""))
 		(println "Command: " ?c)
 		(bind ?r (eval ?c))
 		(println "Result: " ?r)
-		(bind ?r (if (numberp ?r) then ?r
+		(bind ?r (if (numberp ?r) then (str-cat ?r)
 					else (if (stringp ?r) then (str-cat "\"" ?r "\"")
-					else (if (symbolp ?r) then ?r
+					else (if (symbolp ?r) then (str-cat ?r)
 					else (if (multifieldp ?r) then (str-cat "(" (implode$ ?r) ")")
-					else "")))))
-		(write-file ?*cmd-path* (str-cat "R:" ?r))))
+					else "No Result")))))
+		(write-file ?*rst-path* ?r)
+		(clear-file ?*cmd-path*)))
 		
 (deffunction exit-CLIPS ()
 	(clear-file ?*cmd-path*)
+	(clear-file ?*rst-path*)
 	(exit))
 		
 ;;;;;;;;;;;;;;;;;;;;;; Command execution by rule  ;;;;;;;;;;;;;;;;;;;;;		
