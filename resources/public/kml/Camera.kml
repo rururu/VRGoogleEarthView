@@ -2,12 +2,12 @@
   xmlns:gx="http://www.google.com/kml/ext/2.2">
   <Document>
 	<LookAt>
-	<longitude>-10.3361939408266</longitude>
-	<latitude>60.2206429116477</latitude>
+	<longitude>100.596916526026</longitude>
+	<latitude>-45.9181358254001</latitude>
 	<range>100</range>
-	<tilt>80</tilt>
-	<altitude>0</altitude>
-	<heading>277.0</heading>
+	<tilt>90</tilt>
+	<altitude>4</altitude>
+	<heading>77.99522</heading>
 	<altitudeMode>relativeToGround</altitudeMode>
 	</LookAt>
 	<Style id="1">
@@ -22,7 +22,7 @@
 	  <name>russor</name>
 	  <description>On board of boat in Race</description>
 	  <Point>
-		<coordinates>-10.3361939408266,60.2206429116477,0</coordinates>
+		<coordinates>100.596916526026,-45.9181358254001,0</coordinates>
 	  </Point>
 	</Placemark>
   </Document>

@@ -32,6 +32,19 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;; WORK PHASE ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	
+(defrule Change-onboard
+	(declare (salience +1))
+	(Work phase)
+	?b1 <- (Boat (name ?n1)
+			(onboard TRUE))
+	?onb <- (ONB-BOAT ?n2 & :(neq ?n2 ?n1))
+	?b2 <- (Boat (name ?n2)
+			(onboard FALSE))
+	=>
+	(println "Change onboard " ?n1 " -> " ?n2)
+	(modify ?b1 (onboard FALSE))
+	(modify ?b2 (onboard TRUE)))
+
 (defrule Work-phase
 	(Work phase)
 	(MY-BOAT ?mb)

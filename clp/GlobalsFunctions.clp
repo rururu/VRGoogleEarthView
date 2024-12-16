@@ -5,8 +5,8 @@
 	?*data-interval* = 4
 	?*race* = EOF
 	?*CAM-HDG* = 0
-	?*CAM-ALT* = 0
-	?*CAM-TLT* = 80
+	?*CAM-ALT* = 4
+	?*CAM-TLT* = 90
 	?*CAM-RNG* = 100
 	?*boat-names* = (create$)
 	?*cmd-path* = "resources/public/comm/command.txt"
@@ -68,7 +68,8 @@
   (+ ?lat (* (/ ?knots 3600 60) ?sec (cos ?ang))))
 
 (deffunction fut-lon (?lon ?knots ?sec ?ang ?lat)
-  (+ ?lon (/ (* (/ ?knots 3600 60) ?sec (sin ?ang)) (cos (deg-rad ?lat)))))
+  ;;(+ ?lon (/ (* (/ ?knots 3600 60) ?sec (sin ?ang)) (cos (deg-rad ?lat)))))
+  (+ ?lon (* (/ ?knots 3600 60) ?sec (sin ?ang))))
 
 (deffunction move-boats (?time)
   (do-for-all-facts ((?b Boat)) TRUE

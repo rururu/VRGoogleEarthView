@@ -8,7 +8,7 @@ This progect uses [A Tool for Building Expert Systems CLIPS](https://www.clipsru
 Chrome browser with
 [VR Dashboard plugin](https://chrome.google.com/webstore/search/VR%20Dashboard)
 
-[![Watch the video](1.png)](https://youtu.be/NUErnVKNLAw)
+[![Watch the video](1.png)](https://www.youtube.com/watch?v=-mU8IFLJL6w)
 Click the screenshot to see a video!
 
 ## Prerequisites
@@ -62,10 +62,18 @@ More easy do this using Thonny's menu Tools -> Manage packages..
 2. If you have Thonny installed (see Prerequisites 3. above), use run_with_thonny.bat as a template for the run.bat.
 3. To enliven frozen process you may need to click blue button in upper left corner of VR page.
 4. Also, sometimes you have to refresh KML servers on Google Earth side panel (View menu) LinkToCamera.kml and LinktoFleet.kml
+5. In case of error try to restart CLIPS: Open sidepanel System Control by button with symbol "<", click the button Restart CLIPS and wait a bit..
 
 ## Video Lesson
 
 [Lesson 1](https://www.youtube.com/watch?v=oOA6aZAwZYQ)
+
+## More Videos
+
+1. [Vendee Globe 2024. Crozet Islands](https://www.youtube.com/watch?v=-mU8IFLJL6w)
+2. [Christmas race Helsinki - New York 2024. Start](https://www.youtube.com/watch?v=rzFJu84os68)
+3. [Christmas race Helsinki - New York 2024. Finish](https://www.youtube.com/watch?v=w5J4xQFkwM0)
+4. [Cape Town and Cape of Good Hope](https://youtu.be/NUErnVKNLAw)
 
 _More detailed version: [https://github.com/rururu/sail-pro](https://github.com/rururu/sail-pro)_
 

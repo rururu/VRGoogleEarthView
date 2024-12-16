@@ -106,14 +106,11 @@ def run(server_class=HTTPServer, handler_class=HttpGetHandler, port=None):
     finally:
         if server is not None:
             server.server_close()
-
-race = ''
+            
 rpath = 'NMEA_CACHE/RACE.txt'
-
-if not os.path.exists(rpath):
-    save_file(rpath, '')
-    
-while len(race) == 0 or race == 'EOF':
+save_file(rpath, '')
+race = ''
+while race == '' or race == 'EOF':
      race = load_file(rpath)
      time.sleep(1)
 

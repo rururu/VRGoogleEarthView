@@ -6,6 +6,8 @@
 (load clp/KMLGeneration.clp)
 (load clp/Facts.clp)
 (reset)
+(clear-file ?*cmd-path*)
+(clear-file ?*rst-path*)
 (assert 
 	(Step phase)
 	(clock 0)

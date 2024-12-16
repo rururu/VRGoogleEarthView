@@ -26,11 +26,11 @@ NAMES_PATH = 'resources/public/chart/fleet.txt'
 if 'cam_hdg' not in st.session_state:
     st.session_state.cam_hdg = 0
 if 'cam_alt' not in st.session_state:
-    st.session_state.cam_alt = 0
+    st.session_state.cam_alt = 4
 if 'alt_factor' not in st.session_state:
     st.session_state.alt_factor = 1
 if 'cam_tilt' not in st.session_state:
-    st.session_state.cam_tilt = 80
+    st.session_state.cam_tilt = 90
 if 'cam_rng' not in st.session_state:
     st.session_state.cam_rng = 100
 if 'names' not in st.session_state:
@@ -76,7 +76,7 @@ if cam_hdg != st.session_state.cam_hdg:
 c1, c2 = st.columns(2)
 with c1:
     alt_factor = st.session_state.alt_factor
-    cam_alt = st.slider("Altitude", 0, 40, 0, step=2, key='camalt')
+    cam_alt = st.slider("Altitude", 0, 40, 4, step=2, key='camalt')
     if cam_alt != st.session_state.cam_alt:
         st.session_state.cam_alt = cam_alt
         send_cmd('(assert (Kml-cam-alt '+str(cam_alt * alt_factor)+'))')
@@ -87,7 +87,7 @@ with c2:
         st.session_state.alt_factor = alt_factor
         send_cmd('(assert (Kml-cam-alt '+str(cam_alt * alt_factor)+'))')
     
-cam_tilt = st.slider("Tilt", 0, 90, 80, step=10, key='camtilt')
+cam_tilt = st.slider("Tilt", 0, 90, 90, step=10, key='camtilt')
 if cam_tilt != st.session_state.cam_tilt:
     st.session_state.cam_tilt = cam_tilt
     send_cmd('(assert (Kml-cam_tilt '+str(cam_tilt)+'))')
