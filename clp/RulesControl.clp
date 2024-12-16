@@ -6,13 +6,13 @@
 		then
 		(bind ?c (str-replace ?c "~" "\""))
 		(println "Command: " ?c)
-		(if (eq (operating-system) WINDOWS)
-			then (bind ?r (eval ?c))
-			else
-			(try
+		;(if (eq (operating-system) WINDOWS)
+		;	then (bind ?r (eval ?c))
+		;	else
+		;	(try
 				(bind ?r (eval ?c))
-				catch
-				(println "Command " ?c " execution error!")))
+		;		catch
+		;		(println "Command " ?c " execution error!")))
 		(println "Result: " ?r)
 		(bind ?r (if (numberp ?r) then (str-cat ?r)
 					else (if (stringp ?r) then (str-cat "\"" ?r "\"")

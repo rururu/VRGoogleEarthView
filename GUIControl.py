@@ -104,6 +104,7 @@ def load_boats():
     
 def go_onboard():
     onb_boat = st.session_state.onb_boat
+    onb_boat = onb_boat.strip()
     send_cmd('(assert (On-board ~'+onb_boat+'~))')
     
 c3, c4, c5 = st.columns([1, 4, 1])
