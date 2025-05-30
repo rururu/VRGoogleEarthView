@@ -2,12 +2,12 @@
   xmlns:gx="http://www.google.com/kml/ext/2.2">
   <Document>
 	<LookAt>
-	<longitude>138.730800141459</longitude>
-	<latitude>-44.8011233583879</latitude>
+	<longitude>138.345259711885</longitude>
+	<latitude>33.3541772035844</latitude>
 	<range>100</range>
 	<tilt>80</tilt>
 	<altitude>0</altitude>
-	<heading>84.8</heading>
+	<heading>213.90278</heading>
 	<altitudeMode>relativeToGround</altitudeMode>
 	</LookAt>
 	<Style id="1">
@@ -19,10 +19,10 @@
 	</Style>
 	<Placemark>
 	  <styleUrl>#1</styleUrl>
-	  <name>ARYLLA / INC-BUREAU</name>
+	  <name>russor</name>
 	  <description>On board of boat in Race</description>
 	  <Point>
-		<coordinates>138.730800141459,-44.8011233583879,0</coordinates>
+		<coordinates>138.345259711885,33.3541772035844,0</coordinates>
 	  </Point>
 	</Placemark>
   </Document>

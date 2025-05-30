@@ -1,4 +1,4 @@
-import http.server
+from http.server import BaseHTTPRequestHandler
 import socketserver
 import socket
 import argparse
@@ -6,8 +6,10 @@ import logging
 import os
 import datetime
 import sys
-from nmea_decoder3 import aivdm_parse, gprmc_parse
-from util import save_file, save_list
+from nmea_decoder4 import aivdm_parse, gprmc_parse
+#from util import save_file, save_list
+from Sockets import exe_cmd
+from multiprocessing import Process
 
 parser = argparse.ArgumentParser()
 
@@ -28,12 +30,12 @@ HOST = (args.bind if args.bind else '0.0.0.0')
 OUTPORT = (int(args.outport) if args.outport else 10000)
 PORT = (int(args.port) if args.port else 8081)
 
-save_file("RACE.txt", "")
+#save_file("RACE.txt", "")
 
 connections = dict()
 sockets = dict()
 
-class NMEAHandler(http.server.BaseHTTPRequestHandler):
+class NMEAHandler(BaseHTTPRequestHandler):
     def do_POST(s):
         content_len = int(s.headers.get('Content-Length'))
         post_body = s.rfile.read(content_len)
@@ -53,22 +55,32 @@ flags = dict()
 bt_info = []
 bt_name = []
 
+def ass_list_ord(typ, lst):
+    for e in lst:
+        e = e.replace(","," ")
+        exe_cmd("(assert ("+typ+" "+e+"))")
+
 def cashe_message(race, message):
     global bt_info, bt_name
     
-    if not os.path.exists(race):
-        try:
-            os.mkdir(race)
-        except OSError:
-            print ("Failed to create directory %s" % race)
-        else:
-            print ("The directory %s was successfully created" % race)
-            save_file(race + "/" + "boat_models.fct", "")
+#     if not os.path.exists(race):
+#         try:
+#             os.mkdir(race)
+#         except OSError:
+#             print ("Failed to create directory %s" % race)
+#         else:
+#             print ("The directory %s was successfully created" % race)
+#             save_file(race + "/" + "boat_models.fct", "")
+
     if message.find(b"AIVDM") != -1 :
         if getFlag(race) == "0": # Save and clear lists
             setFlag("1", race)
-            save_list(race + "/" + "BoatInfo.csv", bt_info)
-            save_list(race + "/" + "BoatName.csv", bt_name)
+            #save_list(race + "/" + "BoatInfo.csv", bt_info)
+            ass_list_ord("BoatInfo", bt_info)
+            #save_list(race + "/" + "BoatName.csv", bt_name)
+            ass_list_ord("BoatName", bt_name)
+            exe_cmd("(run)")
+            #exe_cmd("(facts)")
             bt_info = []
             bt_name = []
         message2 = aivdm_parse(message)
@@ -89,16 +101,20 @@ def cashe_message(race, message):
             else:
                 print(now,"Boats coordinates on", race, "voyage for time", printTime(btime) , "are obtained")
                 times[race] = btime
-                save_file("RACE.txt", race)
+                exe_cmd('(assert (RACE "'+race+'"))')
+                #save_file(RACEP, race)
         else:
             openf = 'ab'
         message2 = gprmc_parse(message)
-        path = race + "/" + "MyBoat.csv"
-        with open(path, openf) as fdFlag:
-            if message2 is not None:
-                #print(str(message2))
-                fdFlag.write(message2)
-	
+        if message2 is not None:
+            ass_list_ord("MyBoat", [message2.decode()])
+#         path = race + "/" + "MyBoat.csv"
+#         with open(path, openf) as fdFlag:
+#             if message2 is not None:
+#                 #print(str(message2))
+#                 fdFlag.write(message2)
+#                 ass_list_ord("MyBoat", [message2.decode()])
+
 def setFlag(str, race):
     flags[race] = str
 
@@ -156,30 +172,33 @@ def accept_connection(sock):
         return None
 
 
-logging.basicConfig(level=logging.INFO)
+def start_nmea_server():
+    logging.basicConfig(level=logging.INFO)
 
-logging.info("Creating Server on port " + str(PORT))
-server = None
-try:
-    server = socketserver.TCPServer(("", PORT), NMEAHandler)
-    logging.info("httpd listening on port " + str(PORT))
+    logging.info("Creating NMEA Server on port " + str(PORT))
+    server = None
     try:
-        server.serve_forever()
-    except KeyboardInterrupt:
-        pass
-except Exception as e:
-    print(f"Error: {e}")  
-    try:
-        while True:
+        server = socketserver.TCPServer(("", PORT), NMEAHandler)
+        logging.info("NMEA Server listening on port " + str(PORT))
+        try:
+            server.serve_forever()
+        except KeyboardInterrupt:
             pass
-    except KeyboardInterrupt:
-        print('Ctrl + C')
-        sys.exit()
-    
-finally:
-    if server is not None:
-        logging.info('Cleaning up')
-        server.server_close()
-        logging.info('Stopping httpd')
-    logging.info('Exit\n')
-    
+    except Exception as e:
+        print(f"Error: {e}")  
+        try:
+            while True:
+                pass
+        except KeyboardInterrupt:
+            print('Ctrl + C')
+            sys.exit()
+        
+    finally:
+        if server is not None:
+            logging.info('Cleaning up')
+            server.server_close()
+            logging.info('Stopping httpd')
+        logging.info('Exit\n')
+        
+if __name__ == '__main__':
+    start_nmea_server()

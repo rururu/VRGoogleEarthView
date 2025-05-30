@@ -1,18 +1,17 @@
 ;; Deftemplates
 
 (deftemplate Boat
-	(slot timestamp (type STRING)(default ""))
     (slot name (type STRING))
     (slot lat (type FLOAT))
     (slot lon (type FLOAT))
     (slot crs (type FLOAT))
     (slot spd (type FLOAT))
+	(slot time (type INTEGER))
     (slot mmsi (type INTEGER))
 	(slot type (type STRING))
 	(slot model (type FACT-ADDRESS))
     (slot onboard (type SYMBOL)(default FALSE))
-	(slot info-clock (type INTEGER))
-	(slot clock (type INTEGER)(default 0)))
+	(slot info-date (type STRING)))
     
 (deftemplate Model
     (slot boat (type STRING)(default ""))

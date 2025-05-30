@@ -5,22 +5,21 @@
 (defglobal
 	?*CAM-HDG* = 0
 	?*CAM-ALT* = 0
+	?*POW-ALT* = 0
 	?*CAM-TLT* = 80
 	?*CAM-RNG* = 100
-	?*ONB-KML-PATH* = "resources/public/kml/Camera.kml"
-	?*FLT-KML-PATH* = "resources/public/kml/Fleet.kml"
 	?*TEMP-KML* = "<kml xmlns=\"http://www.opengis.net/kml/2.2\"
   xmlns:gx=\"http://www.google.com/kml/ext/2.2\">
   <Document>
-	<LookAt>
+	<Camera>
 	<longitude>$lon</longitude>
 	<latitude>$lat</latitude>
 	<range>$rng</range>
 	<tilt>$tlt</tilt>
 	<altitude>$alt</altitude>
 	<heading>$hdg</heading>
-	<altitudeMode>relativeToGround</altitudeMode>
-	</LookAt>
+	<altitudeMode>absolute</altitudeMode>
+	</Camera>
 	<Style id=\"1\">
 	  <IconStyle>
 	    <Icon>
@@ -62,7 +61,10 @@
 	?*FLEET-SFX-KML* =
 	"</Document>
 </kml>
-")
+"
+	?*FLT-KML* = ""
+	?*ONB-KML* = ""
+)
 
 ;;;;;;;;;;;;;;;;;;;; F U N C T I O N S ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -73,21 +75,16 @@
 	?name)
 
 (deffunction substitute-in-kml (?kml ?name ?lat ?lon ?hdg)
+	(bind ?alt (integer (* ?*CAM-ALT* (** 10 ?*POW-ALT*))))
 	(bind ?name (name-correction ?name))
 	(bind ?kml (str-replace ?kml "$name" (str-cat ?name)))
 	(bind ?kml (str-replace ?kml "$lat" (str-cat ?lat)))
 	(bind ?kml (str-replace ?kml "$lon" (str-cat ?lon)))
 	(bind ?kml (str-replace ?kml "$hdg" (str-cat ?hdg)))
-	(bind ?kml (str-replace ?kml "$alt" (str-cat ?*CAM-ALT*)))
+	(bind ?kml (str-replace ?kml "$alt" (str-cat ?alt)))
 	(bind ?kml (str-replace ?kml "$tlt" (str-cat ?*CAM-TLT*)))
 	(bind ?kml (str-replace ?kml "$rng" (str-cat ?*CAM-RNG*)))
 	?kml)
-
-(deffunction save-kml (?kml ?path)
-	(if (open ?path kml "w")
-		then
-		(printout kml ?kml crlf)
-		(close kml)))
 
 (deffunction create-fleet-kml ()
 	(bind ?kml ?*FLEET-PFX-KML*)
@@ -102,6 +99,7 @@
 			(bind ?bpm (str-replace ?bpm "$lon" (str-cat ?lon)))
 			(bind ?kml (str-cat ?kml ?bpm))))
 	(bind ?kml (str-cat ?kml ?*FLEET-SFX-KML*))
+	(bind ?*FLT-KML* ?kml)
 	?kml)
 	
 (deffunction create-onboard-kml ()
@@ -111,18 +109,13 @@
 		(bind ?lat2 (fut-lat ?b:lat ?b:spd ?*interval* ?ang))
 		(bind ?lon2 (fut-lon ?b:lon ?b:spd ?*interval* ?ang ?b:lat))
 		(bind ?name (name-correction ?b:name))
-		(bind ?kml (substitute-in-kml ?*TEMP-KML* ?name ?lat2 ?lon2 (+ ?b:crs ?*CAM-HDG*))))
+		(bind ?hdg (+ ?b:crs ?*CAM-HDG*))
+		(if (> ?hdg 360)
+			then (bind ?hdg (- ?hdg 360)))
+		(bind ?kml (substitute-in-kml ?*TEMP-KML* ?name ?lat2 ?lon2 ?hdg)))
+	(bind ?*ONB-KML* ?kml)
 	?kml)
 	
-(defrule Save-fleet-kml
-	(clock ?t & :(= (mod ?t 60) 0))
-	=>
-	(save-kml (create-fleet-kml) ?*FLT-KML-PATH*))
-	
-(defrule Save-onboard-kml
-	(clock ?t & :(= (mod ?t 4) 0))
-	=>
-	(save-kml (create-onboard-kml) ?*ONB-KML-PATH*))
 	
 
 		

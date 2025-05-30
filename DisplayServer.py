@@ -1,13 +1,13 @@
-#!/usr/bin/env python3
 from http.server import BaseHTTPRequestHandler
 from http.server import HTTPServer
 from urllib.parse import urlparse, parse_qs
 import os
-from util import *
-import sys
 import json
 import time
-
+from nmea_decoder4 import aivdm_parse, gprmc_parse
+from util import save_file, save_list, load_file
+from Sockets import exe_cmd
+        
 class HttpGetHandler(BaseHTTPRequestHandler):
     """Handler for SSE do_GET."""
 
@@ -16,13 +16,7 @@ class HttpGetHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         parsed_path = urlparse(self.path)
         path = parsed_path.path
-        if self.path == "/fleet":
-            self.send_response(200)
-            self.send_header("Content-type", "text/kml")
-            self.send_header("Access-Control-Allow-Origin", "*")
-            self.end_headers()
-            self.wfile.write(self.mk_kml_fleet(self.root+'/kml/Fleet.kml').encode())
-        elif self.path == "/camera":
+        if self.path == "/camera":
             self.send_response(200)
             self.send_header("Content-type", "text/kml")
             self.send_header("Access-Control-Allow-Origin", "*")
@@ -40,6 +34,17 @@ class HttpGetHandler(BaseHTTPRequestHandler):
             self.send_header("Access-Control-Allow-Origin", "*")
             self.end_headers()
             self.wfile.write(self.mk_event('fleet', self.root+'/chart/fleet.geojson').encode())
+        elif path == "/command":
+            query_components = parse_qs(parsed_path.query)
+            kk = list(query_components.keys())
+            if len(kk) > 0:
+                cmd = kk[0]
+                prm = query_components[cmd][0]
+                exe_cmd('('+cmd+' "'+prm+'")')
+            self.send_response(200)
+            self.send_header("Content-type", "text/event-stream")
+            self.send_header("Access-Control-Allow-Origin", "*")
+            self.end_headers()
         else:
             if path == '/chart':
                 filename = self.root+'/LeafletChart.html'
@@ -72,15 +77,16 @@ class HttpGetHandler(BaseHTTPRequestHandler):
             return data
             
     def mk_kml_camera(self, path):
-        data = self.read_file(path)
-        #print('Camera data '+str(data))
+        exe_cmd("(assert (move all boats))")
+        exe_cmd("(run)")
+        data = exe_cmd("(create-onboard-kml)")
         if len(data) > 0:
             return data
         else:
             return ''
 
     def mk_kml_fleet(self, path):
-        data = self.read_file(path)
+        data = exe_cmd("(create-fleet-kml)")
         print('Update Fleet data ')
         if len(data) > 0:
             return data
@@ -88,7 +94,7 @@ class HttpGetHandler(BaseHTTPRequestHandler):
             return ''
 
     def mk_event(self, kind, path):
-        data = self.read_file(path)
+        data = exe_cmd("(create-fleet-geojson)")
         if len(data) > 0:
             return 'event: '+kind+'\ndata: '+data+'\n\n'
         else:
@@ -106,22 +112,10 @@ def run(server_class=HTTPServer, handler_class=HttpGetHandler, port=None):
     finally:
         if server is not None:
             server.server_close()
-            
-rpath = 'NMEA_CACHE/RACE.txt'
-save_file(rpath, '')
-race = ''
-while race == '' or race == 'EOF':
-     race = load_file(rpath)
-     time.sleep(1)
 
-print("Race "+str(race))
+if __name__ == '__main__':
+    myb = load_file("MY_BOAT.txt")
+    exe_cmd('(assert (MY-BOAT '+myb+'))')
+    exe_cmd('(assert (ONB-BOAT '+myb+'))')
 
-port = sys.argv[1]
-
-run(port=int(port))
-
-
-
-      
-    
-      
+    run(port=int(8448))

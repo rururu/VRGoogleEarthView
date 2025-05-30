@@ -1,7 +1,6 @@
 import time
+from datetime import datetime
 
-CMD_PATH = 'resources/public/comm/command.txt'
-RST_PATH = 'resources/public/comm/result.txt'
 TIMEOUT = 10
 
 def load_file(path):
@@ -59,3 +58,14 @@ def send_cmd(cmd):
         time.sleep(1)
     print('Command '+cmd+' waiting server timeout '+str(TIMEOUT))
     return ''
+
+def after(d1, d2): # date format '2023-02-28 14:30:00+05:30'
+    frm = "%Y-%m-%d %H:%M:%S%z"
+    do1 = datetime.strptime(d1, frm)
+    do2 = datetime.strptime(d2, frm)
+    return do1 < do2
+
+# print(after("2025-05-11 20:12:00+00:00", "2025-05-11 20:12:01+00:00"))
+# print(after("2025-06-11 20:12:00+00:00", "2025-05-11 20:12:01+00:00"))
+    
+

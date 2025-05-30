@@ -9,8 +9,6 @@
 	?*CAM-TLT* = 90
 	?*CAM-RNG* = 100
 	?*boat-names* = (create$)
-	?*cmd-path* = "resources/public/comm/command.txt"
-	?*rst-path* = "resources/public/comm/result.txt"
 	?*boat-names-path* = "resources/public/chart/fleet.txt"
 	?*base* = "http://localhost:8448/")
   
@@ -33,37 +31,6 @@
     (bind ?a (create$ ?a (+ ?min (* (rand01) (- ?max ?min))))))
   ?a)
 
-(deffunction read-file (?path)
-    (if (open ?path rr "r")
-		then
-		(bind ?r (read rr))
-		(close rr)
-		(return ?r)
-		else
-		(println "read-file " ?path " error!")
-		(return FALSE)))
-
-(deffunction write-file (?path ?txt)
-    (if (open ?path rw "w")
-     then
-      (printout rw ?txt)
-      (close rw)
-      (return TRUE)
-     else
-      (println "write-file " ?path " error!")
-      (return FALSE)))
-      
-(deffunction clear-file (?path)
-	(write-file ?path ""))
-	
-(deffunction empty-file-p (?path)
-	(eq (read-file ?path) EOF))
-
-(deffunction append-file (?path ?txt)
-    (open ?path ra "a")
-    (printout ra ?txt)
-    (close ra))
-
 (deffunction fut-lat (?lat ?knots ?sec ?ang)
   (+ ?lat (* (/ ?knots 3600 60) ?sec (cos ?ang))))
 
@@ -71,20 +38,20 @@
   ;;(+ ?lon (/ (* (/ ?knots 3600 60) ?sec (sin ?ang)) (cos (deg-rad ?lat)))))
   (+ ?lon (* (/ ?knots 3600 60) ?sec (sin ?ang))))
 
-(deffunction move-boats (?time)
+(deffunction move-boats (?now)
   (do-for-all-facts ((?b Boat)) TRUE
     (bind ?lat ?b:lat)
     (bind ?lon ?b:lon)
     (bind ?crs ?b:crs)
     (bind ?spd ?b:spd)
     (bind ?ang (deg-rad ?crs))
+    (bind ?time (- ?now ?b:time))
     (bind ?lat2 (fut-lat ?lat ?spd ?time ?ang))
     (bind ?lon2 (fut-lon ?lon ?spd ?time ?ang ?lat))
- 	(modify ?b 
+ 	(modify ?b
+		(time ?now)
 		(lat ?lat2)
-		(lon ?lon2)
-		(crs ?crs)
-		(spd ?spd))))
+		(lon ?lon2))))
 
 (deffunction boat-feature (?name ?lat ?lon ?course ?speed ?iconURL)
   (bind ?props (str-cat "{\"name\":\"" ?name "\",\"iconURL\":\"" ?iconURL "\",\"course\":" ?course ",\"speed\":" ?speed "}"))
@@ -150,43 +117,8 @@
 	;; united json
 	(str-cat "[{\"boats\":" ?bs ",\"models\":" ?ms ",\"onb_model\":" ?onb-model "}]"))
 
-(deffunction save-mf (?mf ?path)
-	(if (open ?path mf "w")
-		then
-		(foreach ?e ?mf
-			(printout mf ?e crlf))
-		(close mf)))
-		
-(deffunction load-csv-facts (?path ?typ)
-	(if (open ?path csv-facts "r")
-		then
-		(bind ?i 0)
-		(while (neq (bind ?ln (readline csv-facts)) EOF)
-			(bind ?i (+ ?i 1))
-			(if (= ?i 1) 
-				then
-				(bind ?t (explode$ (str-replace ?ln "," " ")))
-				else
-				(bind ?r (explode$ (str-replace ?ln "," " ")))
-				(bind ?f (str-cat "(" ?typ " "))
-				(loop-for-count (?j (length$ ?t))
-					(bind ?f (str-cat ?f "(" (nth$ ?j ?t) " " (nth$ ?j ?r) ")")))
-				(bind ?f (str-cat ?f ")"))
-				(assert-string ?f)))
-		(close csv-facts)
-		?i))
 
-(deffunction load-csv-ordered-facts (?path ?typ)
-	(if (open ?path csv-facts "r")
-		then
-		(bind ?i 0)
-		(while (neq (bind ?ln (readline csv-facts)) EOF)
-			(bind ?i (+ ?i 1))
-			(bind ?r (str-replace ?ln "," " "))
-			(bind ?f (str-cat "(" ?typ " " ?r ")"))
-			(assert-string ?f))
-		(close csv-facts)
-		?i))
+		
 
 
 	

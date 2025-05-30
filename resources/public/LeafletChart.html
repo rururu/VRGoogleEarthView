@@ -1,28 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Chart View</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <!-- <link rel="stylesheet" href="css/leaflet.css" /> -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-   integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-   crossorigin=""/>
-  <!-- <script src="leaflet/leaflet.js"></script> -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-   integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-   crossorigin=""></script>
-  <!-- <script src="js/leaflet.rotatedMarker.js"></script> -->
-  <script src="js/Leaflet.GeoSSE.src.js"></script>
-  <script src="js/L.Control.MousePosition.js"></script>
-  <script src="js/leaflet.rotatedMarker.js"></script>
+	<title>Chart View</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+	integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+	crossorigin=""/>
+	<link rel="stylesheet" href="css/leaflet-slider.css" />
+	<!-- <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css"> -->
+	<!-- <script src="leaflet/leaflet.js"></script> -->
+	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+	integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+	crossorigin=""></script>
+	<!-- <script src="js/leaflet.rotatedMarker.js"></script> -->
+	<script src="js/Leaflet.GeoSSE.src.js"></script>
+	<script src="js/L.Control.MousePosition.js"></script>
+	<script src="js/leaflet.rotatedMarker.js"></script>
+	<script src="js/leaflet-slider.js"></script>
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+	<!-- <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script> -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
+	<script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
+	<style> 
+	select {
+	  width: 100%;
+	  padding: 16px 20px;
+	  border: none;
+	  border-radius: 4px;
+	  background-color: #f1f1f1;
+	}
+	</style>
 </head>
-<style>
-    #map { height: 100vh; }
-</style>
 <body>
-    <div id="map"></div>
-    <script type="module">
+	<div id="map" style="left:0px; top:0px;bottom:0px;right:0px; position:absolute;"></div>
+    <script> // type="module">
 		var map = L.map('map').setView([43, 8], 3);
+		L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+			attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+		}).addTo(map);
 
 		L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 			attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -33,12 +48,18 @@
 			featureIdField: "featureId"
 			});
 		sseLyr.connectToEventStream();
+				
+		var boatSelectorPrefix = '<h4>Select a boat to board</h4><select id="cars" onchange="BoatSelected(value)" >'+
+									'<option value=""></option>';
+		var boatSelectorSuffix = '</select>';
+		var boatSelector = boatSelectorPrefix+boatSelectorSuffix;
 
 		var layerGroup = L.layerGroup([]);
 		
 		sseLyr.eventSource.addEventListener(
 			"fleet",
 			function fleetEvent(event) {
+				boatSelector = boatSelectorPrefix;
 				var LG = [];
 				var geojson = JSON.parse(event.data);
 				//console.log("GEOJSON "+JSON.stringify(geojson, null, 4));
@@ -48,9 +69,8 @@
 						var name = feature.properties.name;
 						var course = feature.properties.course;
 						var speed = feature.properties.speed;
-						var popup = '<table><tr><td>'+name
-												+'</td><tr><td>'+course
-												+'</td><tr><td>'+speed+'</td></tr><table>';
+						var popup = name+'<table><tr><td>course</td><td>'+course
+									+'</td><tr><td>speed</td><td>'+speed+'</td></tr><table>';
 						var lat = feature.geometry.coordinates[1];
 						var lon = feature.geometry.coordinates[0];
 						var marker = L.marker([lat,lon],
@@ -60,11 +80,14 @@
 												 rotationOrigin: "center center",
 												 draggable: false}).bindPopup(popup);
 						LG.push(marker);
+						boatSelector += '<option value="'+name+'">'+name+'</option>';
 					}
 				});
+				
 				map.removeLayer(layerGroup);
 				layerGroup = L.layerGroup(LG);
 				layerGroup.addTo(map);
+				boatSelector += boatSelectorSuffix;
 			},
 			false
 			); 
@@ -72,7 +95,128 @@
 		
 		var mousepos = new L.control.mousePosition;
 		mousepos.addTo(map);
-									
-	</script>
+		
+//      C O N T R O L S		
+
+		H = L.control.slider(function(value) {
+			$.get("http://localhost:8448/command",{"head": value})
+			}, {
+			title: "Camera Heading",
+			logo: "H",
+			max: 180,
+			min: -180,
+			value: 0,
+			step: 10,
+			size: '480px',
+			//orientation:'vertical',
+			increment: true,
+			id: 'head'
+		}).addTo(map);
+
+		A = L.control.slider(function(value) {
+			$.get("http://localhost:8448/command",{"alt-power": value})
+			}, {
+			title: "Power of Altitude",
+			logo: "PA",
+			max: 5,
+			min: 0,
+			value: 0,
+			step: 1,
+			size: '300px',
+			//orientation:'vertical',
+			increment: true,
+			id: 'alt'
+		}).addTo(map);
+
+		A = L.control.slider(function(value) {
+			$.get("http://localhost:8448/command",{"altitude": value})
+			}, {
+			title: "Camera Altitude",
+			logo: "A",
+			max: 100,
+			min: 10,
+			value: 10,
+			step: 10,
+			size: '300px',
+			//orientation:'vertical',
+			increment: true,
+			id: 'alt'
+		}).addTo(map);
+
+		T = L.control.slider(function(value) {
+			$.get("http://localhost:8448/command",{"tilt": value})
+			}, {
+			title: "Camera Tilt",
+			logo: "T",
+			max: 90,
+			min: 0,
+			value: 90,
+			step: 10,
+			size: '300px',
+			//orientation:'vertical',
+			increment: true,
+			id: 'tilt'
+		}).addTo(map);
+
+		R = L.control.slider(function(value) {
+			$.get("http://localhost:8448/command",{"range": value})
+			}, {
+			title: "Camera Range",
+			logo: "R",
+			max: 200,
+			min: 0,
+			value: 100,
+			step: 1,
+			size: '300px',
+			//orientation:'vertical',
+			increment: true,
+			id: 'range'
+		}).addTo(map);
+		
+		function BoatSelected(value) {
+			$.get("http://localhost:8448/command",{"onboard": value})
+		}
+				
+		L.easyButton({
+			states: [{
+					icon: '<img src="/img/sailing.png">',    
+					title: 'Select a boat to board',
+					onClick: function(btn, map) {
+						bbPopup = L.popup().setContent(boatSelector);
+						bbPopup.setLatLng(map.getCenter()).openOn(map);
+					}
+			}]
+		}).addTo(map);;
+
+		L.easyButton({
+			states: [{
+					icon: '<img src="/img/bluball.png">',    
+					title: 'Print facts',
+					onClick: function(btn, map) {
+						$.get("http://localhost:8448/command",{"exec": "(facts)"})
+					}
+			}]
+		}).addTo(map);;
+		
+		cmdInput = '<h4>Input CLIPS command</h4>'+
+					'<label for="cmd">command:</label>'+
+					'<input type="text" id="cmd" name="cmd "onchange="ComandExecute(this.value)">'
+					
+		function ComandExecute(value) {
+			$.get("http://localhost:8448/command",{"exec": value})
+		}
+
+		L.easyButton({
+			states: [{
+					icon: '<img src="/img/grndiamd.gif">',    
+					title: 'Execute CLIPS command',
+					onClick: function(btn, map) {
+						exePopup = L.popup().setContent(cmdInput);
+						exePopup.setLatLng(map.getCenter()).openOn(map);
+					}
+			}]
+		}).addTo(map);;
+		
+</script>
 </body>
 </html>

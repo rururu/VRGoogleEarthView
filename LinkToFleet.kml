@@ -11,7 +11,7 @@
 	<Link>
 		<href>http://localhost:8448/fleet</href>
 		<refreshMode>onInterval</refreshMode>
-		<refreshInterval>600</refreshInterval>
+		<refreshInterval>1200</refreshInterval>
 	</Link>
 </NetworkLink>
 </Document>

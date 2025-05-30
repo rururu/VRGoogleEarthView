@@ -8,12 +8,12 @@ def aivdm_parse(msg):
                 +str(m.lon)+","\
                 +str(m.course)+","\
                 +str(m.speed)+","\
-                +str(m.mmsi)+"\n"
+                +str(m.mmsi)
         return b.encode('utf-8')
     elif m.msg_type == 5:
         shipname = m.shipname
         shipname = shipname.replace("\"", "DQ")
-        n = "5,\""+str(shipname)+"\","+str(m.mmsi)+"\n"
+        n = "5,\""+str(shipname)+"\","+str(m.mmsi)
         return n.encode('utf-8')
 
 def gprmc_parse(msg):
@@ -25,13 +25,7 @@ def gprmc_parse(msg):
                       +str(msg.longitude)+","\
                       +str(msg.true_course)+","\
                       +str(msg.spd_over_grnd)+","\
-                  "\""+str(msg.datestamp)+"\"\n"
+                  "\""+str(msg.datestamp)+"\""
             return onb.encode('utf-8')
-#        elif type(msg) is pynmea2.types.talker.MWV:
-#           wda = "(wind-angle "+str(msg.wind_angle)+")\r\n"
-#           return wda.encode('utf-8')
-#       elif type(msg) is pynmea2.types.talker.VWR:
-#           wds = "(wind-speed "+str(msg.wind_speed_kn)+")\r\n"
-#           return wds.encode('utf-8')
     except pynmea2.ParseError as e:
         print('Parse error: {}'.format(e))
