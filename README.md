@@ -73,11 +73,12 @@ The interface in this video is a bit outdated
 
 ## More Videos
 
-1. [Japan spring run 2025. Kanmon strates](https://www.youtube.com/watch?v=f05fT74qrdg)
-2. [Vendee Globe 2024. Crozet Islands](https://www.youtube.com/watch?v=-mU8IFLJL6w)
-3. [Christmas race Helsinki - New York 2024. Start](https://www.youtube.com/watch?v=rzFJu84os68)
-4. [Christmas race Helsinki - New York 2024. Finish](https://www.youtube.com/watch?v=w5J4xQFkwM0)
-5. [Cape Town and Cape of Good Hope](https://youtu.be/NUErnVKNLAw)
+1. [Around Fastnet Lighthouse 2025](https://youtu.be/0RJvrW5n3Sg)
+2. [Japan spring run 2025. Kanmon strates](https://www.youtube.com/watch?v=f05fT74qrdg)
+3. [Vendee Globe 2024. Crozet Islands](https://www.youtube.com/watch?v=-mU8IFLJL6w)
+4. [Christmas race Helsinki - New York 2024. Start](https://www.youtube.com/watch?v=rzFJu84os68)
+5. [Christmas race Helsinki - New York 2024. Finish](https://www.youtube.com/watch?v=w5J4xQFkwM0)
+6. [Cape Town and Cape of Good Hope](https://youtu.be/NUErnVKNLAw)
 
 _More detailed version: [https://github.com/rururu/sail-pro](https://github.com/rururu/sail-pro)_
 
