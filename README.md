@@ -47,9 +47,11 @@ $ run.bat        # Windows (replace python.exe in this file in accordance with y
 
 #### Note:
 
-1. You may need to install some Python libraries during the first run! To do this:
+1. You may need to install some Python libraries before the first run! To do this:
 
 ```shell
+$ pip install clipspy
+...
 $ pip install pyais
 ...
 $ pip install pynmea2
@@ -67,13 +69,15 @@ More easy do this using Thonny's menu Tools -> Manage packages..
 ## Video Lesson
 
 [Lesson 1](https://www.youtube.com/watch?v=oOA6aZAwZYQ)
+The interface in this video is a bit outdated
 
 ## More Videos
 
-1. [Vendee Globe 2024. Crozet Islands](https://www.youtube.com/watch?v=-mU8IFLJL6w)
-2. [Christmas race Helsinki - New York 2024. Start](https://www.youtube.com/watch?v=rzFJu84os68)
-3. [Christmas race Helsinki - New York 2024. Finish](https://www.youtube.com/watch?v=w5J4xQFkwM0)
-4. [Cape Town and Cape of Good Hope](https://youtu.be/NUErnVKNLAw)
+1. [Japan spring run 2025. Kanmon strates](https://www.youtube.com/watch?v=f05fT74qrdg)
+2. [Vendee Globe 2024. Crozet Islands](https://www.youtube.com/watch?v=-mU8IFLJL6w)
+3. [Christmas race Helsinki - New York 2024. Start](https://www.youtube.com/watch?v=rzFJu84os68)
+4. [Christmas race Helsinki - New York 2024. Finish](https://www.youtube.com/watch?v=w5J4xQFkwM0)
+5. [Cape Town and Cape of Good Hope](https://youtu.be/NUErnVKNLAw)
 
 _More detailed version: [https://github.com/rururu/sail-pro](https://github.com/rururu/sail-pro)_
 

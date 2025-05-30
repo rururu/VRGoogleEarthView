@@ -11,7 +11,7 @@
 	<Link>
 		<href>http://localhost:8448/camera</href>
 		<refreshMode>onInterval</refreshMode>
-		<refreshInterval>8</refreshInterval>
+		<refreshInterval>16</refreshInterval>
 	</Link>
 </NetworkLink>
 </Document>
