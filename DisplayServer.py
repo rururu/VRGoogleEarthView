@@ -113,9 +113,12 @@ def run(server_class=HTTPServer, handler_class=HttpGetHandler, port=None):
         if server is not None:
             server.server_close()
 
-if __name__ == '__main__':
+def start_DisplayServer():
     myb = load_file("MY_BOAT.txt")
     exe_cmd('(assert (MY-BOAT '+myb+'))')
     exe_cmd('(assert (ONB-BOAT '+myb+'))')
 
     run(port=int(8448))
+
+if __name__ == '__main__':
+    start_DisplayServer()

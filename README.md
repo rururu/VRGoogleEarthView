@@ -64,7 +64,8 @@ More easy do this using Thonny's menu Tools -> Manage packages..
 2. If you have Thonny installed (see Prerequisites 3. above), use run_with_thonny.bat as a template for the run.bat.
 3. To enliven frozen process you may need to click blue button in upper left corner of VR page.
 4. Also, sometimes you have to refresh KML servers on Google Earth side panel (View menu) LinkToCamera.kml and LinktoFleet.kml
-5. In case of error try to restart CLIPS: Open sidepanel System Control by button with symbol "<", click the button Restart CLIPS and wait a bit..
+5. Before restart the program on Linux you have to kill servers using ./kill_all.sh script.
+On Windows enough to close all wndows.
 
 ## Video Lesson
 

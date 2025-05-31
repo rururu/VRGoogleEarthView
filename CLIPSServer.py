@@ -30,8 +30,11 @@ def data_handler(data):
         print("CLIPSServer wrong data: "+data)
         return None
 
-if __name__ == '__main__':
+def start_CLIPSServer():
     print("clipspy starts..")
     start_clips()
     print("CLIPS Server starts..")
     start_data_server(data_handler)
+
+if __name__ == '__main__':
+    start_CLIPSServer()

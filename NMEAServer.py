@@ -172,7 +172,7 @@ def accept_connection(sock):
         return None
 
 
-def start_nmea_server():
+def start_NMEAServer():
     logging.basicConfig(level=logging.INFO)
 
     logging.info("Creating NMEA Server on port " + str(PORT))
@@ -201,4 +201,4 @@ def start_nmea_server():
         logging.info('Exit\n')
         
 if __name__ == '__main__':
-    start_nmea_server()
+    start_NMEAServer()
