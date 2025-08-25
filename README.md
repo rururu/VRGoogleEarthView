@@ -15,7 +15,7 @@ Click the screenshot to see a video!
 
 You need to be installed on your machine:
 
-1. Chrome browser.
+1. Chrome or Firefox browser.
 
 2. [VR Dashboard plugin](https://chromewebstore.google.com/search/VR%20Dashboard%20I.T.Y.C.)
 
